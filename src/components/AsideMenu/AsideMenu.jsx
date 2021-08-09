@@ -1,8 +1,12 @@
 import React from 'react';
 
+import './AsideMenu.css';
+
 const AsideMenu = () => {
     return (
-        <p>AsideMenu</p>
+        <section className="aside-menu" >
+            AsideMenu
+        </section>
     )
 };
 

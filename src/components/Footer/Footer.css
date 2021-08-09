@@ -1,0 +1,85 @@
+.footer-class {
+  height: 300px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-column {
+  height: 100%;
+  width: 400px;
+  display: inline-block;
+  padding: 10px 50px;
+}
+
+.footer-column-header {
+  width: 100%;
+  font-size: large;
+  border-style: solid;
+  border-color: white;
+  border-width: 0px 0px 2px 0px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.footer-column-content {
+  width: 100%;
+  font-size: small;
+  text-align: left;
+  color: #696969;
+}
+
+.footer-input {
+  height: 30px;
+}
+
+.footer-column-element {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  display: block;
+  width: 100%;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #696969;
+}
+
+.footer-column-element-button {
+  border-radius: 5px;
+  float: right;
+  height: auto;
+  width: 100px;
+  background-color: orange;
+  font-size: medium;
+  color: white;
+  transition: background-color 0.5s ease-out;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.footer-column-element-button:hover {
+  background-color: #696969;
+  transition: background-color 0.5s ease-out;
+}
+
+.footer-column-content input,
+.footer-column-content textarea {
+  resize: none;
+  border-radius: 5px;
+}
+
+.footer-column-content a,
+.footer-column-content a:focus,
+.footer-column-content a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-column-content a:hover {
+  text-decoration: none;
+  color: white;
+  background-color: #696969;
+  border-radius: 5px;
+}
