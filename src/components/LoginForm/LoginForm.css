@@ -1,0 +1,60 @@
+.sign-in-header {
+  position: relative;
+  background-color: #f5f5f0;
+  width: 90%;
+  font-size: large;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid #ebebe0;
+}
+
+.login-form {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in-row {
+  margin-top: 10px;
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.button {
+  border-radius: 5px;
+  height: auto;
+  width: 100px;
+  font-size: medium;
+  color: white;
+  transition: background-color 0.5s ease-out;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin: 10px;
+}
+
+.sign-in-button {
+  background-color: orange;
+}
+
+.button:hover {
+  background-color: #696969;
+  transition: background-color 0.5s ease-out;
+}
+
+.cancel-button {
+  background-color: red;
+}
+
+.login-form-input {
+  border-radius: 5px;
+  height: auto;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 100%;
+}
+
+.login-label {
+  width: 100%;
+}

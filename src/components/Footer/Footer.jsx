@@ -29,7 +29,7 @@ const Footer = () => {
                         <input className="footer-column-element footer-input" type="text" placeholder="Email"
                             value={emailAddress} onChange={handleOnEmailAddressChange}/>
                         <br/>
-                        <textarea className="footer-column-element" placeholder="Treść wiadomości..." value={message}
+                        <textarea className="footer-column-element footer-text-input" placeholder="Treść wiadomości..." value={message}
                             onChange={handleOnMessageChange} />
                         <br/>
                         <button className="footer-column-element-button" type="submit">Wyslij</button>
