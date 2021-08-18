@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, BrowserRouter as Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoginForm from '../LoginForm/LoginForm';
 
 import './NavBar.css';
@@ -14,7 +14,6 @@ const NavBar = () => {
     }
 
     return (
-        <Router>
             <header className="header">
                 <Link to='meals' className="header-link">POSIŁKI</Link>
                 <Link to="activities" className="header-link">AKTYWNOŚCI</Link>
@@ -25,7 +24,6 @@ const NavBar = () => {
                 </div>
                 <LoginForm handleOnClose={handleOnClose} isModalOpen={isModalOpen}/>
             </header>
-        </Router>
     )
 };
 

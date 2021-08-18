@@ -48,8 +48,9 @@
 }
 
 .header-button:hover,
-.header-link:hover {
-  background-color: gray;
+.header-link:hover,
+.header-right-link:hover {
+  background-color: #696969;
 }
 
 .right-align {
