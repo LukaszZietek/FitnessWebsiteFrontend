@@ -1,0 +1,30 @@
+.delete-container {
+  position: relative;
+  margin: 10px;
+  top: 30%;
+  text-align: center;
+}
+
+.delete-container button {
+  border-radius: 5px;
+  font-size: medium;
+  width: 100px;
+  transition: background-color 0.3s ease-out;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.delete-container button:hover {
+  background-color: #696969;
+  transition: background-color 0.3s ease-out;
+}
+
+.delete-button {
+  background-color: red;
+}
+
+.ok-button {
+  background-color: green;
+}

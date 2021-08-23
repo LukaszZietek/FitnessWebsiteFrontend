@@ -20,7 +20,7 @@ const NavBar = () => {
                 <Link to="reports" className="header-link">RAPORTY</Link>
                 <div className="right-align">
                     <button className="header-button" onClick={handleOnClick}>LOGOWANIE</button>
-                    <Link to="myaccount" className="header-right-link">MOJE KONTO</Link>
+                    <Link to="/myaccount" className="header-right-link">MOJE KONTO</Link>
                 </div>
                 <LoginForm handleOnClose={handleOnClose} isModalOpen={isModalOpen}/>
             </header>
