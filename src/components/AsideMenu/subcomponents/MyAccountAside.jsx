@@ -8,6 +8,7 @@ const MyAccountAside = () => {
         <div className="my-account-div">
             <Link to="/myaccount/change-password" className="aside-account-link">Zmień hasło</Link>
             <Link to="/myaccount/delete-account" className="aside-account-link">Usuń konto</Link>
+            <Link to="/reports" className="aside-account-link">Moje raporty</Link>
         </div>
     );
 };
