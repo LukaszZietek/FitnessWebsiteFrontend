@@ -11,6 +11,8 @@ const MonthlyReports = () => {
     const averageProteins = 5;
     const averageFats = 6;
     const averageCarbohydrates = 7;
+    const burnedCalories = 111;
+    const averageBurnedCalories = 555;
 
     return (
         <div className="report-container">
@@ -47,6 +49,14 @@ const MonthlyReports = () => {
                 <tr>
                     <th className="left-th">Średnia spożywana wartość węglowodanów w ciągu dnia [g]: </th>
                     <th className="right-th">{averageCarbohydrates}</th>
+                </tr>
+                <tr>
+                    <th className="left-th">Spalone kalorie [kcal]: </th>
+                    <th className="right-th">{burnedCalories}</th>
+                </tr>
+                <tr>
+                    <th className="left-th">Średnia spalona wartość kalorii w ciągu dnia [kcal]: </th>
+                    <th className="right-th">{averageBurnedCalories}</th>
                 </tr>
             </table>
         </div>

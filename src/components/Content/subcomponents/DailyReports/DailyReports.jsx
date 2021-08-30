@@ -7,6 +7,7 @@ const DailyReports = () => {
     const proteins = 1;
     const fats = 2;
     const carbohydrates = 3;
+    const burnedCalories = 111;
 
     return (
         <div className="report-container">
@@ -27,6 +28,10 @@ const DailyReports = () => {
                 <tr>
                     <th className="left-th">Spożyte tłuszcze [g]: </th>
                     <th className="right-th">{fats}</th>
+                </tr>
+                <tr>
+                    <th className="left-th">Spalone kalorie [kcal]: </th>
+                    <th className="right-th">{burnedCalories}</th>
                 </tr>
             </table>
         </div>
