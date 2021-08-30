@@ -3,6 +3,8 @@ import { Link} from 'react-router-dom';
 
 import './Footer.css';
 
+import { ABOUT_US_PATH, CONTACT_PATH } from '../../common/Paths';
+
 const Footer = () => {
     const [nameAndSurname, setNameAndSurname] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
@@ -39,10 +41,10 @@ const Footer = () => {
                 <div className="footer-column">
                     <p className="footer-column-header">MENU</p>
                     <div className="footer-column-content">
-                        <Link to="about-us" className="footer-column-element">O nas</Link>
+                        <Link to={ABOUT_US_PATH} className="footer-column-element">O nas</Link>
                     </div>
                     <div className="footer-column-content">
-                        <Link to="contact" className="footer-column-element">Kontakt</Link>
+                        <Link to={CONTACT_PATH} className="footer-column-element">Kontakt</Link>
                     </div>
                 </div>
                 <div className="footer-column">

@@ -1,0 +1,32 @@
+.report-container {
+  margin: 50px;
+  text-align: center;
+}
+
+.report-table {
+  text-align: left;
+  margin: 0 auto;
+  border: 1px solid;
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.report-table th,
+.report-table td {
+  padding: 15px;
+  border-bottom: 1px solid;
+}
+
+.report-table th {
+  border-right: 1px solid;
+  border-collapse: collapse;
+}
+
+.left-th {
+  width: 90%;
+}
+
+.right-th {
+  width: 10%;
+  text-align: center;
+}
