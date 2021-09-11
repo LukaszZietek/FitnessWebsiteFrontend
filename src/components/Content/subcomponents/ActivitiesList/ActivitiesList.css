@@ -1,0 +1,33 @@
+.activities-container {
+  margin: 50px;
+  text-align: center;
+}
+
+.activities-table {
+  column-width: auto;
+  text-align: center;
+  margin: 0 auto;
+  border: 1px solid;
+  width: auto;
+  border-collapse: collapse;
+}
+
+.activities-table th,
+.activities-table tr {
+  font-weight: normal;
+  padding: 15px;
+  border-bottom: 1px solid;
+}
+
+.activities-table th {
+  border-right: 1px solid;
+  border-collapse: collapse;
+}
+
+.header-row th {
+  font-weight: bold;
+}
+
+.activities-table .font-weight-b {
+  font-weight: bold;
+}

@@ -1,0 +1,27 @@
+.activities-container {
+  margin: 50px;
+  text-align: center;
+}
+
+.button {
+  border-radius: 5px;
+  height: auto;
+  width: 20%;
+  font-size: medium;
+  transition: background-color 0.5s ease-out;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin: 10px;
+}
+
+.button:hover {
+  background-color: #696969;
+}
+
+.add-button {
+  background-color: green;
+}
+
+.cancel-button {
+  background-color: red;
+}

@@ -5,7 +5,8 @@ import './AsideMenu.css';
 
 import MyAccountAside from './subcomponents/MyAccountAside';
 import ReportsAside from './subcomponents/ReportsAside';
-import {MY_ACCOUNT_PATH, REPORT_PATH} from '../../common/Paths';
+import {ACTIVITIES_PATH, MY_ACCOUNT_PATH, REPORT_PATH} from '../../common/Paths';
+import ActivitiesAside from './subcomponents/ActivitiesAside';
 
 const AsideMenu = () => {
     return (
@@ -13,6 +14,7 @@ const AsideMenu = () => {
                 <Switch>
                         <Route path={MY_ACCOUNT_PATH} component={MyAccountAside} />
                         <Route path={REPORT_PATH} component={ReportsAside} />
+                        <Route path={ACTIVITIES_PATH} component={ActivitiesAside} />
                 </Switch>
             </section>
     )
