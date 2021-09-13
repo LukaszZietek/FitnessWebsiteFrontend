@@ -22,29 +22,8 @@
   padding-right: 10px;
 }
 
-.button {
-  border-radius: 5px;
-  height: auto;
-  width: 100px;
-  font-size: medium;
-  color: white;
-  transition: background-color 0.5s ease-out;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  margin: 10px;
-}
-
 .sign-in-button {
   background-color: orange;
-}
-
-.button:hover {
-  background-color: #696969;
-  transition: background-color 0.5s ease-out;
-}
-
-.cancel-button {
-  background-color: red;
 }
 
 .login-form-input {

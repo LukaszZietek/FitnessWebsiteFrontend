@@ -1,5 +1,30 @@
 .content-wrapper {
-    margin-top: 60px;
-    min-height: calc(100vh - 60px);
-    display: flex;
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
+  display: flex;
+}
+
+.button {
+  border-radius: 5px;
+  height: auto;
+  width: 100px;
+  font-size: medium;
+  color: white;
+  transition: background-color 0.5s ease-out;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  margin: 10px;
+}
+
+.button:hover {
+  background-color: #696969;
+  transition: background-color 0.5s ease-out;
+}
+
+.add-button {
+  background-color: green;
+}
+
+.cancel-button {
+  background-color: red;
 }

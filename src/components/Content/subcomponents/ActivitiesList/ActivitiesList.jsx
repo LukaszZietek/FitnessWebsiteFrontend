@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import './ActivitiesList.css';
 
 import { ACTIVITY_TYPE_TRANSLATION_DICT, ACTIVITY_SPEED_TRANSLATION_DICT } from '../ActivitiesTranslationDict';
-import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from './DateUtilities';
+import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../DateUtilities';
 
 const ActivitiesList = () => {
     const [dummyActivities, setDummyActivities] = useState([
@@ -12,35 +12,40 @@ const ActivitiesList = () => {
             activityType: "running",
             activityTime: 60,
             activitySpeed: "slow",
-            burnedCalories: 400
+            burnedCalories: 400,
+            activityDate: "2021-09-11"
         },
         {
             id: 1,
             activityType: "jumping-rope",
             activityTime: 20,
             activitySpeed: "medium",
-            burnedCalories: 499
+            burnedCalories: 499,
+            activityDate: "2021-09-11"
         },
         {
             id: 2,
             activityType: "cycling",
             activityTime: 120,
             activitySpeed: "fast",
-            burnedCalories: 900
+            burnedCalories: 900,
+            activityDate: "2021-09-11"
         },
         {
             id: 3,
             activityType: "strength-training",
             activityTime: 40,
             activitySpeed: "medium",
-            burnedCalories: 800
+            burnedCalories: 800,
+            activityDate: "2021-09-11"
         },
         {
             id: 4,
             activityType: "running",
             activityTime: 120,
             activitySpeed: "slow",
-            burnedCalories: 800
+            burnedCalories: 800,
+            activityDate: "2021-09-11"
         },
     ]);
     const [activityDate, setActivityDate] = useState(getCurrentDate());
