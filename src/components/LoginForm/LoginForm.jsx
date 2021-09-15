@@ -35,25 +35,25 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
 
     return (
         <Modal handleOnClose={handleOnClose} isOpen={isModalOpen} shouldBeClosedOnOutsideClick={true}>
-            <div className="sign-in-header">
+            <div className="modal-header">
                 Logowanie
             </div>
-            <form className="login-form" method="post" onSubmit={handleOnSubmit}>
-                <div className="sign-in-row">
-                    <label className="login-label">
+            <form className="modal-form" method="post" onSubmit={handleOnSubmit}>
+                <div className="modal-row">
+                    <label className="modal-label">
                         Email lub nazwa użytkownika
                         <br/>
-                        <input type="text" value={login} onChange={handleOnLoginChange} className="login-form-input"/>
+                        <input type="text" value={login} onChange={handleOnLoginChange} className="modal-input"/>
                     </label>
                 </div>
-                <div className="sign-in-row">
-                    <label className="login-label">
+                <div className="modal-row">
+                    <label className="modal-label">
                         Hasło
                         <br/>
-                        <input type="password" value={password} onChange={handleOnPasswordChange} className="login-form-input"/>
+                        <input type="password" value={password} onChange={handleOnPasswordChange} className="modal-input"/>
                     </label>
                 </div>
-                <div className="sign-in-row">
+                <div className="modal-row">
                     <button onClick={handleOnCloseModal} type="button" className="button cancel-button">Anuluj</button>
                     <button type="submit" className="button sign-in-button">Zaloguj</button>
                 </div>

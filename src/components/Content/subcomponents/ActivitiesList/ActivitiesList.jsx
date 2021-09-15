@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import './ActivitiesList.css';
 
 import { ACTIVITY_TYPE_TRANSLATION_DICT, ACTIVITY_SPEED_TRANSLATION_DICT } from '../ActivitiesTranslationDict';
-import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../DateUtilities';
+import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../../../DateUtilities';
 
 const ActivitiesList = () => {
     const [dummyActivities, setDummyActivities] = useState([

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './MealsList.css';
 
-import { checkIfDateIsBetweenTwoDates, getCurrentDate, getPreviousMonthDate } from '../DateUtilities';
+import { checkIfDateIsBetweenTwoDates, getCurrentDate, getPreviousMonthDate } from '../../../DateUtilities';
 
 const MealsList = () => {
     const [dummyMeals, setDummyMeals] = useState([
