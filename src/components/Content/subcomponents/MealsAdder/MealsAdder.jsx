@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import './MealsAdder.css';
+import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
 
 const MealsAdder = () => {
+    const [, forceUpdate] = useState();
+    const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
     const [mealName, setMealName] = useState('');
     const [mealQuantity, setMealQuantity] = useState(1);
     const [quantityUnit, setQuantityUnit] = useState('szt.')
@@ -21,7 +24,14 @@ const MealsAdder = () => {
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        alert('Dodano posiłek');
+        const formValid = simpleValidator.current.allValid();
+        if (!formValid) {
+            simpleValidator.current.showMessages();
+            forceUpdate(1);
+        } else {
+            alert('Dodano posiłek');
+            resetInputs();
+        }
     };
 
     const handleOnCancel = () => {
@@ -44,8 +54,12 @@ const MealsAdder = () => {
                 <div>
                     <label>
                         Nazwa posiłku:
-                        <input type="text" value={mealName} onChange={handleMealNameChange} />
+                        <input type="text" maxLength="30" value={mealName} onChange={handleMealNameChange} />
                     </label>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('nazwa posiłku', mealName,
+                            'required|max:30,string')}
+                    </p>
                 </div>
                 <div>
                     <label>
@@ -58,6 +72,14 @@ const MealsAdder = () => {
                         <option value="g">g</option>
                         <option value="ml">ml</option>
                     </select>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('ilość', mealQuantity,
+                            'required|min:1,num|max:99,num')}
+                    </p>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('jednostka', quantityUnit,
+                            'required|in:szt.,g,ml')}
+                    </p>
                 </div>
                 <div>
                     <label>
@@ -65,6 +87,10 @@ const MealsAdder = () => {
                         <input type="number" value={mealCalories} onChange={handleMealCaloriesChange}
                          min="0" max="10000" />
                     </label>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('kaloryczność posiłku', mealCalories,
+                            'required|min:0,num|max:10000,num')}
+                    </p>
                 </div>
                 <div>
                     <label>
@@ -72,6 +98,10 @@ const MealsAdder = () => {
                         <input type="number" value={mealProteins} onChange={handleMealProteinsChange}
                          min="0" max="1000" />
                     </label>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('ilośc białka', mealCalories,
+                            'required|min:0,num|max:1000,num')}
+                    </p>
                 </div>
                 <div>
                     <label>
@@ -79,6 +109,10 @@ const MealsAdder = () => {
                         <input type="number" value={mealFats} onChange={handleMealFatsChange}
                          min="0" max="1000" />
                     </label>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('ilość tłuszczy', mealCalories,
+                            'required|min:0,num|max:1000,num')}
+                    </p>
                 </div>
                 <div>
                     <label>
@@ -86,6 +120,10 @@ const MealsAdder = () => {
                         <input type="number" value={mealCarbohydrates} onChange={handleMealCarbohydratesChange}
                          min="0" max="1000" />
                     </label>
+                    <p className="validator-message">
+                        {simpleValidator.current.message('ilośc węglowodanów', mealCalories,
+                            'required|min:0,num|max:1000,num')}
+                    </p>
                 </div>
                 <div>
                     <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>

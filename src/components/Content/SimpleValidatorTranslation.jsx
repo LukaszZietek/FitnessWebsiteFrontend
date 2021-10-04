@@ -8,8 +8,9 @@ const CreateSimpleReactValidator = (forceUpdateVariable) => {
                 required: 'Pole :attribute jest wymagane',
                 in: 'Pole :attribute wymaga wybrania jednej z dostępnych opcji',
                 numeric: 'Podana wartość w polu :attribute musi być typu liczbowego',
-                min: 'Wartość w polu :attribute nie może być mniejsza niż :min:type',
-                max: 'Wartość w polu :attribute nie może być większa niż :max:type',
+                min: 'Wartość w polu :attribute nie może być mniejsza/krótsza niż :min',
+                max: 'Wartość w polu :attribute nie może być większa/dłuższa niż :max',
+                alpha: 'Wartość w polu :attribute nie powinna zawierać cyfr',
                 default: 'Wartość w polu :attribute jest niepoprawna'
             }})
     );
