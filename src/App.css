@@ -69,3 +69,7 @@
 .modal-label {
   width: 100%;
 }
+
+.validator-message {
+  color: red;
+}
