@@ -1,7 +1,12 @@
 .content-wrapper {
   margin-top: 60px;
-  min-height: calc(100vh - 60px);
+  min-height: 1000px;
   display: flex;
+}
+
+.center-div {
+  display: grid;
+  place-items: center;
 }
 
 .button {

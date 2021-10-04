@@ -17,35 +17,37 @@ const PasswordChanger = () => {
     }
 
     return (
-        <form className="password-changer-form" onSubmit={handleOnSubmit}>
-            <div className="password-row">
-            <label className="password-label">
-                Poprzednie hasło:
-                <br/>
-                <input className="password-changer-input" type="password" value={oldPassword}
-                    onChange={handleOnOldPasswordChange}/>
-            </label>
-            </div>
-            <div className="password-row">
+        <div className="center-div">
+            <form className="password-changer-form" onSubmit={handleOnSubmit}>
+                <div className="password-row">
                 <label className="password-label">
-                    Nowe hasło:
+                    Poprzednie hasło:
                     <br/>
-                    <input className="password-changer-input" type="password" value={newPassword}
-                        onChange={handleOnNewPasswordChange}/>
+                    <input className="password-changer-input" type="password" value={oldPassword}
+                        onChange={handleOnOldPasswordChange}/>
                 </label>
-            </div>
-            <div className="password-row">
-                <label className="password-label">
-                    Powtórz hasło:
-                    <br/>
-                    <input className="password-changer-input" type="password" value={repeatedPassword}
-                        onChange={handleOnRepeatedPasswordChange}/>
-                </label>
-            </div>
-            <div className="password-row">
-                <button type="submit" className="password-button">Zmień hasło</button>
-            </div>
-        </form>
+                </div>
+                <div className="password-row">
+                    <label className="password-label">
+                        Nowe hasło:
+                        <br/>
+                        <input className="password-changer-input" type="password" value={newPassword}
+                            onChange={handleOnNewPasswordChange}/>
+                    </label>
+                </div>
+                <div className="password-row">
+                    <label className="password-label">
+                        Powtórz hasło:
+                        <br/>
+                        <input className="password-changer-input" type="password" value={repeatedPassword}
+                            onChange={handleOnRepeatedPasswordChange}/>
+                    </label>
+                </div>
+                <div className="password-row">
+                    <button type="submit" className="password-button">Zmień hasło</button>
+                </div>
+            </form>
+        </div>
     );
 };
 

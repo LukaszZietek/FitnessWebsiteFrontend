@@ -11,16 +11,18 @@ import DailyReports from './subcomponents/DailyReports/DailyReports';
 import WeeklyReports from './subcomponents/WeeklyReports/WeeklyReports';
 import MonthlyReports from './subcomponents/MonthlyReports/MonthlyReports';
 import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, WEEKLY_REPORTS_PATH, MONTHLY_REPORTS_PATH, DAILY_REPORTS_PATH, REPORT_PATH, 
-CONTACT_PATH, ABOUT_US_PATH, ADD_ACTIVITIES_PATH, ACTIVITIES_PATH, MEALS_PATH, ADD_MEALS_PATH} from '../../common/Paths';
+CONTACT_PATH, ABOUT_US_PATH, ADD_ACTIVITIES_PATH, ACTIVITIES_PATH, MEALS_PATH, ADD_MEALS_PATH, MY_ACCOUNT_PATH} from '../../common/Paths';
 import ActivitiesAdder from './subcomponents/ActivitiesAdder/ActivitiesAdder';
 import ActivitiesList from './subcomponents/ActivitiesList/ActivitiesList';
 import MealsList from './subcomponents/MealsList/MealsList';
 import MealsAdder from './subcomponents/MealsAdder/MealsAdder';
+import AccountInformation from './subcomponents/AccountInformation/AccountInformation';
 
 const Content = () => {
     return (
         <main className="content">
             <Switch>
+                <Route path={MY_ACCOUNT_PATH} exact component={AccountInformation} />
                 <Route path={CHANGE_PASSWORD_PATH} component={PasswordChanger} />
                 <Route path={DELETE_ACCOUNT_PATH} component={DeleteAccount} />
                 <Route path={WEEKLY_REPORTS_PATH} component={WeeklyReports} />

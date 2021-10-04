@@ -1,0 +1,27 @@
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-column-gap: 50px;
+}
+
+.grid-input {
+  width: 180px;
+  height: 30px;
+}
+
+.f-row {
+  grid-row: 1;
+}
+
+.f-column {
+  grid-column: 1;
+}
+
+.s-column {
+  grid-column: 2;
+}
+
+.s-row {
+  grid-row: 2;
+}
