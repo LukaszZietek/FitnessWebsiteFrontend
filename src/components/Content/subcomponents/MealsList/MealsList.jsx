@@ -76,7 +76,7 @@ const MealsList = () => {
             <th>{item.fats}</th>
             <th>{item.carbohydrates}</th>
             <th>
-                <button onClick={() => deleteItem(item.id)} >
+                <button className="button delete-button" onClick={() => deleteItem(item.id)} >
                     Usuń
                 </button>
             </th>

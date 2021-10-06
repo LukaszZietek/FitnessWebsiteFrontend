@@ -55,7 +55,7 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
                 </div>
                 <div className="modal-row">
                     <button onClick={handleOnCloseModal} type="button" className="button cancel-button">Anuluj</button>
-                    <button type="submit" className="button sign-in-button">Zaloguj</button>
+                    <button type="submit" className="button add-button">Zaloguj</button>
                 </div>
             </form>
         </Modal>

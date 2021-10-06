@@ -70,7 +70,7 @@ const ActivitiesList = () => {
             <th>{ACTIVITY_SPEED_TRANSLATION_DICT[`${item.activitySpeed}`]}</th>
             <th>{item.burnedCalories}</th>
             <th>
-                <button onClick={() => deleteItem(item.id)}>
+                <button className="button delete-button" onClick={() => deleteItem(item.id)}>
                     Usuń
                 </button>
             </th>
