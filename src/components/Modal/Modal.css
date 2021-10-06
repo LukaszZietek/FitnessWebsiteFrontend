@@ -9,7 +9,7 @@
   z-index: 100;
   overflow: hidden;
   margin-top: 10px;
-  min-height: 200px;
+  min-height: 400px;
 }
 
 .modal-style::backdrop {
