@@ -10,7 +10,7 @@
   height: 30px;
 }
 
-.f-row {
+.first-row {
   grid-row: 1;
 }
 
@@ -22,6 +22,14 @@
   grid-column: 2;
 }
 
-.s-row {
+.second-row {
   grid-row: 2;
+}
+
+.third-row {
+  grid-row: 3;
+}
+
+.fourth-row {
+  grid-row: 4;
 }

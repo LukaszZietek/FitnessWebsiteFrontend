@@ -1,0 +1,26 @@
+.personal-info-form {
+  margin-top: 50px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.personal-info-row {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.form-input {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  padding: 7px 7px 7px 7px;
+}
+
+.select-input {
+  -ms-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}

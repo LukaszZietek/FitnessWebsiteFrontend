@@ -20,12 +20,12 @@ const PasswordChanger = () => {
         <div className="center-div">
             <form className="password-changer-form" onSubmit={handleOnSubmit}>
                 <div className="password-row">
-                <label className="password-label">
-                    Poprzednie hasło:
-                    <br/>
-                    <input className="password-changer-input" type="password" value={oldPassword}
-                        onChange={handleOnOldPasswordChange}/>
-                </label>
+                    <label className="password-label">
+                        Poprzednie hasło:
+                        <br/>
+                        <input className="password-changer-input" type="password" value={oldPassword}
+                            onChange={handleOnOldPasswordChange}/>
+                    </label>
                 </div>
                 <div className="password-row">
                     <label className="password-label">

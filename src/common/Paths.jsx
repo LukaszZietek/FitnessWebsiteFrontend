@@ -11,3 +11,4 @@ export const MONTHLY_REPORTS_PATH = REPORT_PATH +  "/monthly";
 export const DAILY_REPORTS_PATH = REPORT_PATH + "/daily";
 export const ADD_ACTIVITIES_PATH = ACTIVITIES_PATH + "/add";
 export const ADD_MEALS_PATH = MEALS_PATH + "/add";
+export const ADD_PERSONAL_INFO_PATH = MY_ACCOUNT_PATH + "/personal-info";
