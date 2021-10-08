@@ -18,6 +18,7 @@ const PasswordChanger = () => {
 
     return (
         <div className="center-div">
+            <h1>Zmień hasło</h1>
             <form className="password-changer-form" onSubmit={handleOnSubmit}>
                 <div className="password-row">
                     <label className="password-label">
