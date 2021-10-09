@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link} from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Footer.css';
 
 import { ABOUT_US_PATH, CONTACT_PATH } from '../../common/Paths';
+import CreateSimpleReactValidator from '../Content/SimpleValidatorTranslation';
 
 const Footer = () => {
+    const [, forceUpdate] = useState();
+    const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
     const [nameAndSurname, setNameAndSurname] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [message, setMessage] = useState('');
@@ -15,7 +18,17 @@ const Footer = () => {
     const handleOnMessageChange = e => setMessage(e.target.value);
     const handleOnSubmit = (e) => {
         e.preventDefault();
-        alert('Wiadomość wysłana');
+        const formValid = simpleValidator.current.allValid();
+        if (!formValid) {
+            simpleValidator.current.showMessages();
+            forceUpdate(1);
+        } else {
+            alert('Wiadomość wysłana, odpowiedź przyjdzie na maila');
+            resetInputs();
+        }
+    }
+
+    const resetInputs = () => {
         setNameAndSurname('');
         setEmailAddress('');
         setMessage('');
@@ -28,13 +41,13 @@ const Footer = () => {
                     <form className="footer-column-content" onSubmit={handleOnSubmit}>
                             <input className="footer-column-element footer-input" type="text" 
                                 placeholder="Imie i Nazwisko" value={nameAndSurname} onChange={handleOnNameAndSurnameChange}/>
-                            <br/>
+                            <p className="validator-message">{simpleValidator.current.message('imie i nazwisko', nameAndSurname, 'required')}</p>
                             <input className="footer-column-element footer-input" type="text" placeholder="Email"
                                 value={emailAddress} onChange={handleOnEmailAddressChange}/>
-                            <br/>
+                            <p className="validator-message">{simpleValidator.current.message('email', emailAddress, 'required|email')}</p>
                             <textarea className="footer-column-element footer-text-input" placeholder="Treść wiadomości..." value={message}
                                 onChange={handleOnMessageChange} />
-                            <br/>
+                            <p className="validator-message">{simpleValidator.current.message('treść wiadomości',message , 'required|min:20,num|max:250,num')}</p>
                             <button className="footer-column-element-button" type="submit">Wyslij</button>
                     </form>
                 </div>

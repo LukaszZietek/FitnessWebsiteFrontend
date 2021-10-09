@@ -11,8 +11,9 @@ const CreateSimpleReactValidator = (forceUpdateVariable) => {
                 min: 'Wartość w polu :attribute nie może być mniejsza/krótsza niż :min',
                 max: 'Wartość w polu :attribute nie może być większa/dłuższa niż :max',
                 alpha: 'Wartość w polu :attribute nie powinna zawierać cyfr',
+                alpha_num_dash: 'Wartość w polu :attribute nie może zawierać spacji',
+                email: 'Email w polu :attribute jest nieprawidłowy',
                 default: 'Wartość w polu :attribute jest niepoprawna',
-                alpha_num_dash: 'Wartość w polu :attribute nie może zawierać spacji'
             }})
     );
 };
