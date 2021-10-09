@@ -20,7 +20,7 @@ import MealsAdder from './subcomponents/MealsAdder/MealsAdder';
 import AccountInformation from './subcomponents/AccountInformation/AccountInformation';
 import PersonalInfoAdder from './subcomponents/PersonalInfoAdder/PersonalInfoAdder';
 import MessageList from './subcomponents/MessageList/MessageList';
-import Message from './Message/Message';
+import Message from './subcomponents/Message/Message';
 
 const Content = () => {
     return (

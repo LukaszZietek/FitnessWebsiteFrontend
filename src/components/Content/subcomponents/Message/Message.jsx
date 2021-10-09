@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { MESSAGES_FROM_CLIENT } from '../../../common/Paths';
+import { MESSAGES_FROM_CLIENT } from '../../../../common/Paths';
 
 import './Message.css';
 
