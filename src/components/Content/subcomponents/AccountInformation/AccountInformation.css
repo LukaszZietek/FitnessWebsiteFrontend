@@ -6,30 +6,7 @@
 }
 
 .grid-input {
-  width: 180px;
+  width: 170px;
   height: 30px;
-}
-
-.first-row {
-  grid-row: 1;
-}
-
-.f-column {
-  grid-column: 1;
-}
-
-.s-column {
-  grid-column: 2;
-}
-
-.second-row {
-  grid-row: 2;
-}
-
-.third-row {
-  grid-row: 3;
-}
-
-.fourth-row {
-  grid-row: 4;
+  padding-left: 10px;
 }

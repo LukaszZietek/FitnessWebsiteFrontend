@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { MESSAGES_FROM_CLIENT } from '../../../../common/Paths';
 
 import './MessageList.css';
 
@@ -9,7 +11,7 @@ const MessageList = () => {
             nameAndSurname: "Lukasz Nowak",
             email: "244244@gmail.com",
             message: "Witam, mam taki problem ...",
-            creationDate: "09-10-2021",
+            creationDate: "2021-10-09",
             viewed: 1
         },
         {
@@ -17,7 +19,7 @@ const MessageList = () => {
             nameAndSurname: "Lukasz Bartkowiak",
             email: "dwdwdwd@gmail.com",
             message: "Witam, pisze w takiej sprawie ...",
-            creationDate: "05-10-2021",
+            creationDate: "2021-10-05",
             viewed: 0
         },
         {
@@ -25,7 +27,7 @@ const MessageList = () => {
             nameAndSurname: "Maciek Nowak",
             email: "blkjl@gmail.com",
             message: "Czesc, chcialbym spytac sie ...",
-            creationDate: "08-09-2021",
+            creationDate: "2021-09-08",
             viewed: 1
         },
         {
@@ -33,7 +35,7 @@ const MessageList = () => {
             nameAndSurname: "Robert Nowak",
             email: "roberto@gmail.com",
             message: "Szanowni Panstwo, chcialbym dop...",
-            creationDate: "08-08-2021",
+            creationDate: "2021-08-08",
             viewed: 0
         }
     ]);
@@ -46,7 +48,7 @@ const MessageList = () => {
             <th>{item.creationDate}</th>
             <th>{item.viewed ? "Tak" : "Nie"}</th>
             <th>
-                <button className="button info-button">Info</button>
+                <Link to={`${MESSAGES_FROM_CLIENT}/${item.id}`} className="link-as-button button info-button">Info</Link>
             </th>
         </tr>
     ));

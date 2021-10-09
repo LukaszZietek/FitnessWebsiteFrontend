@@ -1,0 +1,27 @@
+.message-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-column-gap: 50px;
+}
+
+.grid-message-input {
+  width: 240px;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.all-column {
+  grid-column: 1 / 4;
+}
+
+.grid-textarea-input {
+  width: 860px;
+  height: 200px;
+  padding-left: 10px;
+  resize: none;
+}
+
+.full-width-button {
+  width: 860px;
+}

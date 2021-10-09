@@ -11,7 +11,8 @@ import DailyReports from './subcomponents/DailyReports/DailyReports';
 import WeeklyReports from './subcomponents/WeeklyReports/WeeklyReports';
 import MonthlyReports from './subcomponents/MonthlyReports/MonthlyReports';
 import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, WEEKLY_REPORTS_PATH, MONTHLY_REPORTS_PATH, DAILY_REPORTS_PATH, REPORT_PATH, 
-CONTACT_PATH, ABOUT_US_PATH, ADD_ACTIVITIES_PATH, ACTIVITIES_PATH, MEALS_PATH, ADD_MEALS_PATH, MY_ACCOUNT_PATH, ADD_PERSONAL_INFO_PATH, MESSAGES_FROM_CLIENT} from '../../common/Paths';
+CONTACT_PATH, ABOUT_US_PATH, ADD_ACTIVITIES_PATH, ACTIVITIES_PATH, MEALS_PATH, ADD_MEALS_PATH, MY_ACCOUNT_PATH, ADD_PERSONAL_INFO_PATH,
+MESSAGES_FROM_CLIENT, MESSAGE} from '../../common/Paths';
 import ActivitiesAdder from './subcomponents/ActivitiesAdder/ActivitiesAdder';
 import ActivitiesList from './subcomponents/ActivitiesList/ActivitiesList';
 import MealsList from './subcomponents/MealsList/MealsList';
@@ -19,6 +20,7 @@ import MealsAdder from './subcomponents/MealsAdder/MealsAdder';
 import AccountInformation from './subcomponents/AccountInformation/AccountInformation';
 import PersonalInfoAdder from './subcomponents/PersonalInfoAdder/PersonalInfoAdder';
 import MessageList from './subcomponents/MessageList/MessageList';
+import Message from './Message/Message';
 
 const Content = () => {
     return (
@@ -28,7 +30,8 @@ const Content = () => {
                 <Route path={CHANGE_PASSWORD_PATH} component={PasswordChanger} />
                 <Route path={DELETE_ACCOUNT_PATH} component={DeleteAccount} />
                 <Route path={ADD_PERSONAL_INFO_PATH} component={PersonalInfoAdder} />
-                <Route path={MESSAGES_FROM_CLIENT} component={MessageList} />
+                <Route path={MESSAGES_FROM_CLIENT} exact component={MessageList} />
+                <Route path={MESSAGE} component={Message} />
                 <Route path={WEEKLY_REPORTS_PATH} component={WeeklyReports} />
                 <Route path={MONTHLY_REPORTS_PATH} component={MonthlyReports} />
                 <Route path={[REPORT_PATH, DAILY_REPORTS_PATH]} component={DailyReports} />
