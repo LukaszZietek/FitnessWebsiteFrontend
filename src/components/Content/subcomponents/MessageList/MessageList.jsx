@@ -1,44 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MESSAGES_FROM_CLIENT } from '../../../../common/Paths';
 
 import './MessageList.css';
 
 const MessageList = () => {
-    const [dummyMessages, setDummyMessages] = useState([
-        {
-            id: 0,
-            nameAndSurname: "Lukasz Nowak",
-            email: "244244@gmail.com",
-            message: "Witam, mam taki problem ...",
-            creationDate: "2021-10-09",
-            viewed: 1
-        },
-        {
-            id: 1,
-            nameAndSurname: "Lukasz Bartkowiak",
-            email: "dwdwdwd@gmail.com",
-            message: "Witam, pisze w takiej sprawie ...",
-            creationDate: "2021-10-05",
-            viewed: 0
-        },
-        {
-            id: 2,
-            nameAndSurname: "Maciek Nowak",
-            email: "blkjl@gmail.com",
-            message: "Czesc, chcialbym spytac sie ...",
-            creationDate: "2021-09-08",
-            viewed: 1
-        },
-        {
-            id: 3,
-            nameAndSurname: "Robert Nowak",
-            email: "roberto@gmail.com",
-            message: "Szanowni Panstwo, chcialbym dop...",
-            creationDate: "2021-08-08",
-            viewed: 0
-        }
-    ]);
+    const [dummyMessages, setDummyMessages] = useState([]);
+
+    useEffect(() => {
+        setDummyMessages([
+            {
+                id: 0,
+                nameAndSurname: "Lukasz Nowak",
+                email: "244244@gmail.com",
+                message: "Witam, mam taki problem ...",
+                creationDate: "2021-10-09",
+                viewed: 1
+            },
+            {
+                id: 1,
+                nameAndSurname: "Lukasz Bartkowiak",
+                email: "dwdwdwd@gmail.com",
+                message: "Witam, pisze w takiej sprawie ...",
+                creationDate: "2021-10-05",
+                viewed: 0
+            },
+            {
+                id: 2,
+                nameAndSurname: "Maciek Nowak",
+                email: "blkjl@gmail.com",
+                message: "Czesc, chcialbym spytac sie ...",
+                creationDate: "2021-09-08",
+                viewed: 1
+            },
+            {
+                id: 3,
+                nameAndSurname: "Robert Nowak",
+                email: "roberto@gmail.com",
+                message: "Szanowni Panstwo, chcialbym dop...",
+                creationDate: "2021-08-08",
+                viewed: 0
+            }
+        ]);
+    }, []);
 
     const messagesList = dummyMessages.map(item => (
         <tr key={item.id}>

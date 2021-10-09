@@ -1,20 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './AccountInformation.css';
 
 const AccountInformation = () => {
-    const [username, setUsername] = useState('Bogdan');
-    const [email, setEmail] = useState('lukaszzietekk@gmail.com');
-    const [date, setDate] = useState('1999-09-25');
-    const [creationDate, setCreationDate] = useState('2021-10-04');
-    const [height, setHeight] = useState(160);
-    const [weight, setWeight] = useState(90);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [date, setDate] = useState('');
+    const [creationDate, setCreationDate] = useState('');
+    const [height, setHeight] = useState(0);
+    const [weight, setWeight] = useState(0);
     const [gender, setGender] = useState('man');
 
     const translateGender = {
         'man': 'Męzczyzna',
-        'woman': "Kobieta"
+        'woman': 'Kobieta'
     }
+
+    useEffect(() => {
+        setUsername('Bogdan');
+        setEmail('lukaszzietekk@gmail.com');
+        setDate('1999-09-25');
+        setCreationDate('2021-10-04');
+        setHeight(160);
+        setWeight(90);
+        setGender('man');
+    }, [])
 
     return (
         <div className="center-div">
