@@ -11,6 +11,7 @@
 
 .button {
   border-radius: 5px;
+  border-width: 0px;
   height: auto;
   width: 100px;
   font-size: medium;
@@ -36,6 +37,10 @@
 
 .delete-button {
   background-color: orange;
+}
+
+.info-button {
+  background-color: #03b6fc;
 }
 
 .modal-header {

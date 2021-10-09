@@ -1,0 +1,24 @@
+.message-table {
+  margin-top: 20px;
+  column-width: auto;
+  text-align: center;
+  border: 1px solid;
+  width: auto;
+  border-collapse: collapse;
+}
+
+.message-table th,
+.message-table tr {
+  font-weight: normal;
+  padding: 15px;
+  border-bottom: 1px solid;
+}
+
+.message-table th {
+  border-right: 1px solid;
+  border-collapse: collapse;
+}
+
+.header-row th {
+  font-weight: bold;
+}

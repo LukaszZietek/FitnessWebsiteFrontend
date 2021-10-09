@@ -110,7 +110,6 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                         <br/>
                         <input type="password" value={repeatedPassword} onChange={handleOnRepeatedPasswordChange}
                             className="modal-input"/>
-                        {console.log(simpleValidator)}
                         <p className="validator-message">{simpleValidator.current.message('powtórz hasło', repeatedPassword, `required|min:6,string|max:20,string|alpha_num_dash|in:${password}`)}</p>
                     </label>
                 </div>
