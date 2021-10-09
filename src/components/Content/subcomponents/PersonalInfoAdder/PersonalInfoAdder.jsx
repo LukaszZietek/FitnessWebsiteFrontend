@@ -7,8 +7,8 @@ import './PersonalInfoAdder.css';
 const PersonalInfoAdder = () => {
     const [, forceUpdate] = useState();
     const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
-    const [height, setHeight] = useState(0);
-    const [weight, setWeight] = useState(0);
+    const [height, setHeight] = useState(100);
+    const [weight, setWeight] = useState(30);
     const [gender, setGender] = useState();
 
     const handleOnHeightChange = e => setHeight(e.target.value);
@@ -16,8 +16,8 @@ const PersonalInfoAdder = () => {
     const handleOnGenderChange = e => setGender(e.target.value);
 
     const resetInputs = () => {
-        setHeight(0);
-        setWeight(0);
+        setHeight(100);
+        setWeight(30);
         setGender();
     }
 
@@ -57,7 +57,7 @@ const PersonalInfoAdder = () => {
                         <input className="form-input" type="number" min="30" max="200" value={weight}
                             onChange={handleOnWeightChange} />
                     </label>
-                    <p className="validator-message">{simpleValidator.current.message('wzrost', height, 'min:30,num|max:200,num')}</p>
+                    <p className="validator-message">{simpleValidator.current.message('waga', weight, 'min:30,num|max:200,num')}</p>
                 </div>
                 <div className="personal-info-row">
                     <label>
@@ -69,7 +69,7 @@ const PersonalInfoAdder = () => {
                             <option value="woman">Kobieta</option>
                         </select>
                     </label>
-                    <p className="validator-message">{simpleValidator.current.message('wzrost', height, 'in:man,woman')}</p>
+                    <p className="validator-message">{simpleValidator.current.message('płeć', gender, 'in:man,woman')}</p>
                 </div>
                 <div>
                     <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>
