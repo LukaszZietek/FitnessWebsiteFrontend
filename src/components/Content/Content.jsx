@@ -21,6 +21,7 @@ import AccountInformation from './subcomponents/AccountInformation/AccountInform
 import PersonalInfoAdder from './subcomponents/PersonalInfoAdder/PersonalInfoAdder';
 import MessageList from './subcomponents/MessageList/MessageList';
 import Message from './subcomponents/Message/Message';
+import MainPage from './subcomponents/MainPage/MainPage';
 
 const Content = () => {
     return (
@@ -41,7 +42,7 @@ const Content = () => {
                 <Route path={ACTIVITIES_PATH} component={ActivitiesList} />
                 <Route path={ADD_MEALS_PATH} component={MealsAdder} />
                 <Route path={MEALS_PATH} component={MealsList} />
-                <Route>Content</Route>
+                <Route path="/" exact component={MainPage} />
             </Switch>
         </main>
     )
