@@ -22,6 +22,7 @@ import PersonalInfoAdder from './subcomponents/PersonalInfoAdder/PersonalInfoAdd
 import MessageList from './subcomponents/MessageList/MessageList';
 import Message from './subcomponents/Message/Message';
 import MainPage from './subcomponents/MainPage/MainPage';
+import NotFound from './subcomponents/NotFound/NotFound';
 
 const Content = () => {
     return (
@@ -43,6 +44,7 @@ const Content = () => {
                 <Route path={ADD_MEALS_PATH} component={MealsAdder} />
                 <Route path={MEALS_PATH} component={MealsList} />
                 <Route path="/" exact component={MainPage} />
+                <Route>{NotFound}</Route>
             </Switch>
         </main>
     )
