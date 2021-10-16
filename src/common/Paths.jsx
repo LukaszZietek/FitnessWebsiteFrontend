@@ -14,3 +14,5 @@ export const ADD_MEALS_PATH = MEALS_PATH + "/add";
 export const ADD_PERSONAL_INFO_PATH = MY_ACCOUNT_PATH + "/personal-info";
 export const MESSAGES_FROM_CLIENT = MY_ACCOUNT_PATH + "/messages";
 export const MESSAGE = MY_ACCOUNT_PATH + "/messages/:id";
+export const ADD_NEW_ACTIVITY_TYPE_PATH = MY_ACCOUNT_PATH + "/activity-type";
+export const DELETE_ACTIVITY_TYPE_PATH = MY_ACCOUNT_PATH + "/delete-activity-type";

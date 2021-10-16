@@ -1,0 +1,17 @@
+.activity-type-input {
+  border-radius: 5px;
+  height: auto;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 150px;
+  padding-left: 10px;
+}
+
+.activity-type-row {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.activity-type-button {
+  width: 100%;
+}

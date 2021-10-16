@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import '../AsideMenu.css';
 
-import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, MY_ACCOUNT_PATH, REPORT_PATH, ADD_PERSONAL_INFO_PATH, MESSAGES_FROM_CLIENT} from '../../../common/Paths';
+import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, MY_ACCOUNT_PATH, REPORT_PATH, ADD_PERSONAL_INFO_PATH, MESSAGES_FROM_CLIENT, ADD_NEW_ACTIVITY_TYPE_PATH, DELETE_ACTIVITY_TYPE_PATH} from '../../../common/Paths';
 
 const MyAccountAside = () => {
     return (
@@ -14,6 +14,8 @@ const MyAccountAside = () => {
             <Link to={DELETE_ACCOUNT_PATH} className="aside-link">Usuń konto</Link>
             <Link to={REPORT_PATH} className="aside-link">Moje raporty</Link>
             <Link to={MESSAGES_FROM_CLIENT} className="aside-link">Zgłoszenia</Link>
+            <Link to={ADD_NEW_ACTIVITY_TYPE_PATH} className="aside-link">Dodaj typ aktywności</Link>
+            <Link to={DELETE_ACTIVITY_TYPE_PATH} className="aside-link">Usuń typ aktywności</Link>
         </div>
     );
 };
