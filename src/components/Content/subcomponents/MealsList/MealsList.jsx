@@ -56,6 +56,10 @@ const MealsList = () => {
     const eatenCarbohydrates = 1200;
     const eatenFats = 400;
     const eatenProteins = 70;
+    const caloricDemand = 700;
+    const proteinsDemand = 100;
+    const carbohydratesDemand = 200;
+    const fatsDemand = 150;
 
     const handleDateChange = (e) => {
         if (checkIfDateIsBetweenTwoDates(getPreviousMonthDate(), getCurrentDate(), e.target.value)) {
@@ -106,20 +110,20 @@ const MealsList = () => {
             <table className="meals-table">
                 <tbody>
                     <tr>
-                        <th className="font-weight-b">Spożyte kalorie [kcal]</th>
-                        <th>{eatenCalories}</th>
+                        <th className="font-weight-b">Spożyte kalorie / Zapotrzebowanie kaloryczne [kcal]/[kcal]</th>
+                        <th>{`${eatenCalories}/${caloricDemand}`}</th>
                     </tr>
                     <tr>
-                        <th className="font-weight-b">Spożyte białka [g]</th>
-                        <th>{eatenProteins}</th>
+                        <th className="font-weight-b">Spożyte białka / Zapotrzebowanie na białka [g]/[g]</th>
+                        <th>{`${eatenProteins}/${proteinsDemand}`}</th>
                     </tr>
                     <tr>
-                        <th className="font-weight-b">Spożyte tłuszcze [g]</th>
-                        <th>{eatenFats}</th>
+                        <th className="font-weight-b">Spożyte tłuszcze / Zapotrzebowanie na tłuszcze [g]/[g]</th>
+                        <th>{`${eatenFats}/${fatsDemand}`}</th>
                     </tr>
                     <tr>
-                        <th className="font-weight-b">Spożyte węglowodany [g]</th>
-                        <th>{eatenCarbohydrates}</th>
+                        <th className="font-weight-b">Spożyte węglowodany / Zapotrzebowanie na węglowodany [g]/[g]</th>
+                        <th>{`${eatenCarbohydrates}/${carbohydratesDemand}`}</th>
                     </tr>
                 </tbody>
             </table>
