@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './MainPage.css';
+
+import { ABOUT_US_PATH, CONTACT_PATH } from '../../../../common/Paths';
 
 const MainPage = () => {
     return (
@@ -20,10 +23,10 @@ const MainPage = () => {
             <div className="right-div">
                 <h1>Dołącz do nas już dziś</h1>
                 <div className="center-div">
-                    <button className="button info-button">O nas</button>
+                    <Link to={ABOUT_US_PATH} className="link-as-button button info-button">O nas</Link>
                 </div>
                 <div className="center-div">
-                    <button className="button info-button">Kontakt</button>
+                    <Link to={CONTACT_PATH} className="link-as-button button info-button">Kontakt</Link>
                 </div>
             </div>
         </div>

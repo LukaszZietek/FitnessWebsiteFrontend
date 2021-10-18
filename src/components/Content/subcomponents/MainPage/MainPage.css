@@ -34,9 +34,10 @@
   text-align: center;
 }
 
-.main-page button {
+.main-page a {
   width: 200px;
   height: 100px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
+  line-height: 80px;
 }
