@@ -2,13 +2,15 @@
   height: auto;
   background-color: black;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-column-gap: 0px;
 }
 
 .footer-column {
-  height: 380px;
+  min-height: 380px;
+  max-height: 470px;
   width: 400px;
   display: inline-block;
   padding: 10px 50px;

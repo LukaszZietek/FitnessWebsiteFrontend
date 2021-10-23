@@ -9,11 +9,13 @@ import CreateSimpleReactValidator from '../Content/SimpleValidatorTranslation';
 const Footer = () => {
     const [, forceUpdate] = useState();
     const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
-    const [nameAndSurname, setNameAndSurname] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [message, setMessage] = useState('');
 
-    const handleOnNameAndSurnameChange = e => setNameAndSurname(e.target.value);
+    const handleOnNameChange = e => setName(e.target.value);
+    const handleOnSurnameChange = e => setSurname(e.target.value);
     const handleOnEmailAddressChange = e => setEmailAddress(e.target.value);
     const handleOnMessageChange = e => setMessage(e.target.value);
     const handleOnSubmit = (e) => {
@@ -29,29 +31,36 @@ const Footer = () => {
     }
 
     const resetInputs = () => {
-        setNameAndSurname('');
+        setName('');
+        setSurname('');
         setEmailAddress('');
         setMessage('');
     }
 
     return (
             <footer className="footer-class">
-                <div className="footer-column">
+                <div className="footer-column first-row f-column">
                     <p className="footer-column-header">NAPISZ DO NAS</p>
                     <form className="footer-column-content" onSubmit={handleOnSubmit}>
                             <input className="footer-column-element footer-input" type="text" 
-                                placeholder="Imie i Nazwisko" value={nameAndSurname} onChange={handleOnNameAndSurnameChange}/>
-                            <p className="validator-message">{simpleValidator.current.message('imie i nazwisko', nameAndSurname, 'required')}</p>
+                                placeholder="Imie" value={name} onChange={handleOnNameChange}/>
+                            <p className="validator-message">{simpleValidator.current.message('imie', name, 'required|max:15,string')}</p>
+
+                            <input className="footer-column-element footer-input" type="text" 
+                                placeholder="Nazwisko" value={surname} onChange={handleOnSurnameChange}/>
+                            <p className="validator-message">{simpleValidator.current.message('nazwisko', surname, 'required|max:15,string')}</p>
+
                             <input className="footer-column-element footer-input" type="text" placeholder="Email"
                                 value={emailAddress} onChange={handleOnEmailAddressChange}/>
                             <p className="validator-message">{simpleValidator.current.message('email', emailAddress, 'required|email')}</p>
+
                             <textarea className="footer-column-element footer-text-input" placeholder="Treść wiadomości..." value={message}
                                 onChange={handleOnMessageChange} />
                             <p className="validator-message">{simpleValidator.current.message('treść wiadomości',message , 'required|min:20,num|max:250,num')}</p>
                             <button className="footer-column-element-button" type="submit">Wyslij</button>
                     </form>
                 </div>
-                <div className="footer-column">
+                <div className="footer-column first-row s-column">
                     <p className="footer-column-header">MENU</p>
                     <div className="footer-column-content">
                         <Link to={ABOUT_US_PATH} className="footer-column-element">O nas</Link>
@@ -60,7 +69,7 @@ const Footer = () => {
                         <Link to={CONTACT_PATH} className="footer-column-element">Kontakt</Link>
                     </div>
                 </div>
-                <div className="footer-column">
+                <div className="footer-column first-row t-column">
                     <p className="footer-column-header">DANE ADRESOWE</p>
                     <div className="footer-column-content">
                         adres: Matejki xx/7, 67-100 Nowa Sól
