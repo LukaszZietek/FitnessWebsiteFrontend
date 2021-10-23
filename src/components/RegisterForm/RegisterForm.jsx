@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useMutation } from 'react-query';
 
 import Modal from '../Modal/Modal';
 import CreateSimpleReactValidator from '../Content/SimpleValidatorTranslation';
 
 import { getPreviousCenturyDate, getMaxBirthDate, checkIfDateIsBetweenTwoDates } from '../DateUtilities';
+import { registerAccount } from '../../RequestHelper/RequestHelper';
 
 const RegisterForm = ({handleOnClose, isModalOpen}) => {
+    const registerQuery = useMutation(registerAccount);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [birthDate, setBirthDate] = useState('');
@@ -53,6 +56,8 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
+            console.log(`${username}, ${password}, ${birthDate}, ${email} `);
+            registerQuery.mutate({username, password, email, userInfo: {birthDate}});
             alert('Konto założone');
             resetInputStates();
         }
@@ -92,7 +97,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                         <br/>
                         <input type="date" value={birthDate} onChange={handleOnBirthDateChange} 
                             min={getPreviousCenturyDate()} max={getMaxBirthDate()} />
-                        {ifBirthDateWrong && <p className="validator-message">Podano złą date urodzenia</p> /* tutaj nie jestem pewien co do tej walidacji daty urodzenia */}
+                        {ifBirthDateWrong && <p className="validator-message">Podano złą date urodzenia</p>}
                     </label>
                     <br/>
                 </div>

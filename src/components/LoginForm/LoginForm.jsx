@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useMutation } from 'react-query';
 
 import Modal from '../Modal/Modal';
 
 import './LoginForm.css';
 
+import { authorizeUser } from '../../RequestHelper/RequestHelper';
+import { ApplicationContext } from '../../ApplicationContext/ApplicationProvider';
+
 const LoginForm = ({handleOnClose, isModalOpen}) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const {setToken, setRole, setUsername} = useContext(ApplicationContext);
+    const loginQuery = useMutation(authorizeUser, { onSuccess: ({data}) => {
+        setToken(data.token);
+        setRole(data.role);
+        setUsername(data.username);
+        console.log(data);
+    }});
 
     const handleOnLoginChange = e => setLogin(e.target.value);
     const handleOnPasswordChange = e => setPassword(e.target.value);
@@ -23,7 +33,9 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
+        loginQuery.mutate({login, password});
         alert('Zalogowano');
+        handleOnClose();
     }
 
     useEffect(() => {
