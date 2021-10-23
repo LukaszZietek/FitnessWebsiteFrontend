@@ -1,28 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { useQuery, useMutation } from 'react-query';
 import { useHistory, useParams } from 'react-router';
-import { MESSAGES_FROM_CLIENT } from '../../../../common/Paths';
+
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { MY_ACCOUNT_PATH } from '../../../../common/Paths';
+import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+
+import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
+import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 
 import './Message.css';
+import { getMessage, deleteMessage } from '../../../../RequestHelper/RequestHelper';
 
 const Message = () => {
-    const { id: messageId } = useParams();
-    const history = useHistory();
     const [nameAndSurname, setNameAndSurname] = useState('');
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('');
     const [creationDate, setCreationDate] = useState('');
+    const { token } = useContext(ApplicationContext);
+    const { id: messageId } = useParams();
+    const history = useHistory();
+    const deleteQuery = useMutation(deleteMessage);
+    const { error, isLoading, isError } = useQuery('getMessage', () => getMessage({messageId, token}), { onSuccess: (response) => {
+        if (response.status === SUCCESS_CODE) {
+            const { data } = response;
+            setNameAndSurname(`${data.clientName} ${data.clientSurname}`);
+            setEmail(data.clientEmail);
+            setMessage(data.content);
+            setCreationDate(data.createdAt);
+        }
+    }});
 
-    const deleteMessage = () => {
-        alert(`Usunieto zgloszenie o id ${messageId}`);
-        history.push(`${MESSAGES_FROM_CLIENT}`);
+    if(isLoading){
+        return <RequestLoadingViewer/>;
+    }
+    if(isError){
+        return <RequestErrorViewer errorMessage={error.message} />;
     }
 
-    useEffect(() => {
-        setNameAndSurname('Lukasz Nowak');
-        setEmail('24244@gmail.com');
-        setMessage('Witam mam problem z zalozeniem konta');
-        setCreationDate('2021-10-09');
-    }, [])
+    const handleOnClick = () => {
+        deleteQuery.mutate({messageId, token});
+        alert(`Usunieto zgloszenie o id ${messageId}`);
+        history.push(`${MY_ACCOUNT_PATH}`);
+    }
 
     return (
         <div className="center-div">
@@ -45,7 +65,7 @@ const Message = () => {
                     <textarea className="grid-textarea-input" value={message} disabled/>
                 </div>
                 <div className="third-row all-column">
-                    <button className="button delete-button full-width-button" onClick={deleteMessage}>
+                    <button className="button delete-button full-width-button" onClick={handleOnClick}>
                         Usuń zgłoszenie
                     </button>
                 </div>

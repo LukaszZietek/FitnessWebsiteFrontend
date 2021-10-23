@@ -11,12 +11,15 @@ import { ApplicationContext } from '../../ApplicationContext/ApplicationProvider
 const LoginForm = ({handleOnClose, isModalOpen}) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const {setToken, setRole, setUsername} = useContext(ApplicationContext);
-    const loginQuery = useMutation(authorizeUser, { onSuccess: ({data}) => {
-        setToken(data.token);
-        setRole(data.role);
-        setUsername(data.username);
-        console.log(data);
+    const {setToken, setRole, setUsername, setUserId} = useContext(ApplicationContext);
+    const loginQuery = useMutation(authorizeUser, { onSuccess: (response) => {
+        if (response?.data) {
+            const { data } = response;
+            setToken(data.token);
+            setRole(data.role);
+            setUsername(data.username);
+            setUserId(data.id);
+        }
     }});
 
     const handleOnLoginChange = e => setLogin(e.target.value);

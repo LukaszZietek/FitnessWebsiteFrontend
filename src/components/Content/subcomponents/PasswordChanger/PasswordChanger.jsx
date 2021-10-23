@@ -1,13 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 
 import './PasswordChanger.css';
 
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
+import { useMutation } from 'react-query';
+import { changeUserPassword } from '../../../../RequestHelper/RequestHelper';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 
 const PasswordChanger = () => {
+    const { token } = useContext(ApplicationContext);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
+    const changePasswordQuery = useMutation(changeUserPassword);
     const [, forceUpdate] = useState();
     const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
     simpleValidator.current.messages['in'] = 'Hasla powinny byc jednakowe';
@@ -23,6 +28,7 @@ const PasswordChanger = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
+            changePasswordQuery.mutate({ oldPassword, newPassword, token })
             alert('Hasło zmienione');
             resetInputStates();
         }

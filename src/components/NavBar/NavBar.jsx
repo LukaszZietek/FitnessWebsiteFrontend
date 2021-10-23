@@ -7,11 +7,11 @@ import './NavBar.css';
 import logo from './logo.png';
 
 import { MEALS_PATH, ACTIVITIES_PATH, REPORT_PATH, MY_ACCOUNT_PATH } from '../../common/Paths';
-import ApplicationProvider, { ApplicationContext } from '../../ApplicationContext/ApplicationProvider';
+import { ApplicationContext } from '../../ApplicationContext/ApplicationProvider';
 import RegisterForm from '../RegisterForm/RegisterForm';
 
 const NavBar = () => {
-    const { token, setToken, setUsername, setRole } = useContext(ApplicationContext);
+    const { token, setToken, setUsername, setRole, setUserId } = useContext(ApplicationContext);
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
@@ -30,6 +30,7 @@ const NavBar = () => {
         setToken('');
         setUsername('');
         setRole('');
+        setUserId('');
     }
 
     const userAccountNavBar = token ?

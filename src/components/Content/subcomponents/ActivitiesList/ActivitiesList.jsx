@@ -1,57 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import { useQuery } from 'react-query';
 
 import './ActivitiesList.css';
 
 import { ACTIVITY_TYPE_TRANSLATION_DICT, ACTIVITY_SPEED_TRANSLATION_DICT } from '../ActivitiesTranslationDict';
 import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../../../DateUtilities';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { getUserActivites } from '../../../../RequestHelper/RequestHelper';
+import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+
+import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
+import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
 
 const ActivitiesList = () => {
-    const [dummyActivities, setDummyActivities] = useState([
-        {
-            id: 0,
-            activityType: "running",
-            activityTime: 60,
-            activitySpeed: "slow",
-            burnedCalories: 400,
-            activityDate: "2021-09-11"
-        },
-        {
-            id: 1,
-            activityType: "jumping-rope",
-            activityTime: 20,
-            activitySpeed: "medium",
-            burnedCalories: 499,
-            activityDate: "2021-09-11"
-        },
-        {
-            id: 2,
-            activityType: "cycling",
-            activityTime: 120,
-            activitySpeed: "fast",
-            burnedCalories: 900,
-            activityDate: "2021-09-11"
-        },
-        {
-            id: 3,
-            activityType: "strength-training",
-            activityTime: 40,
-            activitySpeed: "medium",
-            burnedCalories: 800,
-            activityDate: "2021-09-11"
-        },
-        {
-            id: 4,
-            activityType: "running",
-            activityTime: 120,
-            activitySpeed: "slow",
-            burnedCalories: 800,
-            activityDate: "2021-09-11"
-        },
-    ]);
+    const [userActivities, setUserActivities] = useState([]);
     const [activityDate, setActivityDate] = useState(getCurrentDate());
+    const { userId, token } = useContext(ApplicationContext);
     const totallyBurnedCalories = 1000;
     const averageActivitySpeed = "Umiarkowane";
     const averageActivityTime = 200;
+    const { error, isLoading, isError } = useQuery('getUserActivities', () => getUserActivites(userId, token, activityDate), { onSuccess: (response) => {
+        if (response.status === SUCCESS_CODE) {
+            const { data } = response;
+            setUserActivities([...data]);
+        }
+    }});
+
+    if(isLoading){
+        return <RequestLoadingViewer/>;
+    }
+    if(isError){
+        return <RequestErrorViewer errorMessage={error.message} />;
+    }
 
     const handleDateChange = (e) => {
         if (checkIfDateIsBetweenTwoDates(getPreviousMonthDate(), getCurrentDate(), e.target.value)) {
@@ -61,9 +41,9 @@ const ActivitiesList = () => {
         }
      };
 
-    const deleteItem = (id) => setDummyActivities((prevState) => prevState.filter(item => item.id !== id));
+    const deleteItem = (id) => setUserActivities((prevState) => prevState.filter(item => item.id !== id));
 
-    const activitiesRow = dummyActivities.map(item => (
+    const activitiesRow = userActivities.map(item => (
         <tr key={item.id}>
             <th>{ACTIVITY_TYPE_TRANSLATION_DICT[`${item.activityType}`]}</th>
             <th>{item.activityTime}</th>

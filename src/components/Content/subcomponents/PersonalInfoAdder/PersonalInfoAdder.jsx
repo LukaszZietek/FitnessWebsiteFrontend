@@ -1,15 +1,23 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
 
 import './PersonalInfoAdder.css';
 
+import  {MAN, WOMAN } from '../../../../common/UserGender';
+import { useMutation } from 'react-query';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { updateUserInfo } from '../../../../RequestHelper/RequestHelper';
+
 const PersonalInfoAdder = () => {
+    const { userId, token } = useContext(ApplicationContext);
+    const DEFAULT_VALUE = -1;
     const [, forceUpdate] = useState();
     const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
+    const addQuery = useMutation(updateUserInfo);
     const [height, setHeight] = useState(100);
     const [weight, setWeight] = useState(30);
-    const [gender, setGender] = useState();
+    const [gender, setGender] = useState(DEFAULT_VALUE);
 
     const handleOnHeightChange = e => setHeight(e.target.value);
     const handleOnWeightChange = e => setWeight(e.target.value);
@@ -18,7 +26,7 @@ const PersonalInfoAdder = () => {
     const resetInputs = () => {
         setHeight(100);
         setWeight(30);
-        setGender();
+        setGender(DEFAULT_VALUE);
     }
 
     const handleOnCancel = () => {
@@ -32,6 +40,7 @@ const PersonalInfoAdder = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
+            addQuery.mutate({weight, height, gender, token, userId});
             alert('Dodano informacje');
             resetInputs();
         }
@@ -64,12 +73,12 @@ const PersonalInfoAdder = () => {
                         Płeć
                         <br/>
                         <select className="form-input select-input" name="type" value={gender} onChange={handleOnGenderChange}>
-                            <option value=""></option>
-                            <option value="man">Męzczyzna</option>
-                            <option value="woman">Kobieta</option>
+                            <option value={DEFAULT_VALUE}></option>
+                            <option value={MAN}>Męzczyzna</option>
+                            <option value={WOMAN}>Kobieta</option>
                         </select>
                     </label>
-                    <p className="validator-message">{simpleValidator.current.message('płeć', gender, 'in:man,woman')}</p>
+                    <p className="validator-message">{simpleValidator.current.message('płeć', gender, 'in:0,1')}</p>
                 </div>
                 <div>
                     <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>

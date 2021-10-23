@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { deleteUser } from '../../../../RequestHelper/RequestHelper';
 
 import './DeleteAccount.css';
 
 const DeleteAccount = () => {
+    const { token, setToken, setRole, setUsername, setUserId } = useContext(ApplicationContext);
+    const deleteAccount = useMutation(deleteUser);
     var history = useHistory();
 
+    const resetContext = () => {
+        setToken('');
+        setRole('');
+        setUsername('');
+        setUserId('');
+    }
+
     const handleSubmitButton = () => {
+        deleteAccount.mutate(token);
+        resetContext();
         alert('Konto usunieto');
+        history.push('/');
     }
     const handleCancelButton = () => {
         history.push('/');

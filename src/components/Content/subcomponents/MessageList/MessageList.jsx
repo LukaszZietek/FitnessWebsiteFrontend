@@ -1,56 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
+
 import { MESSAGES_FROM_CLIENT } from '../../../../common/Paths';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { getMessagesFromClient } from '../../../../RequestHelper/RequestHelper';
+import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+
+import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
+import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 
 import './MessageList.css';
 
+
 const MessageList = () => {
-    const [dummyMessages, setDummyMessages] = useState([]);
+    const [messages, setMessages] = useState([]);
+    const { token } = useContext(ApplicationContext);
+    const { error, isLoading, isError } = useQuery('getMessages', () => getMessagesFromClient(token), { onSuccess: (response) => {
+        if (response.status === SUCCESS_CODE) {
+            const { data } = response;
+            setMessages([...data]);
+        }
+    }});
 
-    useEffect(() => {
-        setDummyMessages([
-            {
-                id: 0,
-                nameAndSurname: "Lukasz Nowak",
-                email: "244244@gmail.com",
-                message: "Witam, mam taki problem ...",
-                creationDate: "2021-10-09",
-                viewed: 1
-            },
-            {
-                id: 1,
-                nameAndSurname: "Lukasz Bartkowiak",
-                email: "dwdwdwd@gmail.com",
-                message: "Witam, pisze w takiej sprawie ...",
-                creationDate: "2021-10-05",
-                viewed: 0
-            },
-            {
-                id: 2,
-                nameAndSurname: "Maciek Nowak",
-                email: "blkjl@gmail.com",
-                message: "Czesc, chcialbym spytac sie ...",
-                creationDate: "2021-09-08",
-                viewed: 1
-            },
-            {
-                id: 3,
-                nameAndSurname: "Robert Nowak",
-                email: "roberto@gmail.com",
-                message: "Szanowni Panstwo, chcialbym dop...",
-                creationDate: "2021-08-08",
-                viewed: 0
-            }
-        ]);
-    }, []);
+    if(isLoading){
+        return <RequestLoadingViewer/>;
+    }
+    if(isError){
+        return <RequestErrorViewer errorMessage={error.message} />;
+    }
 
-    const messagesList = dummyMessages.map(item => (
+    const messagesList = messages.map(item => (
         <tr key={item.id}>
-            <th>{item.nameAndSurname}</th>
-            <th>{item.email}</th>
-            <th>{item.message}</th>
-            <th>{item.creationDate}</th>
-            <th>{item.viewed ? "Tak" : "Nie"}</th>
+            <th>{`${item.clientName} ${item.clientSurname}`}</th>
+            <th>{item.clientEmail}</th>
+            <th>{item.content}</th>
+            <th>{item.createdAt}</th>
+            <th>{item.ifRead ? "Tak" : "Nie"}</th>
             <th>
                 <Link to={`${MESSAGES_FROM_CLIENT}/${item.id}`} className="link-as-button button info-button">Info</Link>
             </th>

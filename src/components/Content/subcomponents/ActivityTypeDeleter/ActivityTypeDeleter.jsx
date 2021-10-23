@@ -1,22 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useQuery, useMutation } from 'react-query';
 
-import {ACTIVITY_TYPE_TRANSLATION_DICT} from '../ActivitiesTranslationDict';
+import { ACTIVITY_TYPE_TRANSLATION_DICT } from '../ActivitiesTranslationDict';
 import { getActivities, deleteActivity } from '../../../../RequestHelper/RequestHelper';
-import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 
 import './ActivityTypeDeleter.css';
 
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
+import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
+import { SUCCESS_CODE } from '../../../../common/StatusCodes';
 
 const ActivityTypeDeleter = () => {
-    const deleteQuery = useMutation(deleteActivity);
-    const { error, isError, isLoading } = useQuery('getActivities', getActivities, { onSuccess: (data) => setActivityTypes(data)});
-    const [, forceUpdate] = useState();
-    const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
     const [activityTypes, setActivityTypes] = useState([]);
     const [activityType, setActivityType] = useState('');
+    const { token } = useContext(ApplicationContext);
+    const deleteQuery = useMutation(deleteActivity);
+    const { error, isError, isLoading } = useQuery('getActivities', getActivities, { onSuccess: (response) => {
+        if (response.status === SUCCESS_CODE) {
+            const { data } = response;
+            setActivityTypes([...data]);
+        }
+    }});
+    const [, forceUpdate] = useState();
+    const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
 
     if(isLoading){
         return <RequestLoadingViewer/>;
@@ -34,7 +42,7 @@ const ActivityTypeDeleter = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
-            deleteQuery.mutate(activityTypes.find(element => element.name === activityType).id);
+            deleteQuery.mutate({id: activityTypes.find(element => element.name === activityType).id, token});
             setActivityTypes(prevState => prevState.filter(item => item.name !== activityType));
             alert(`Usunieto typ aktywności: ${activityType}`);
             setActivityType('');

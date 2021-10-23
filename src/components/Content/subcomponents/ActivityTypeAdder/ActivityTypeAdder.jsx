@@ -1,10 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
+import { useMutation } from 'react-query';
 
 import './ActivityTypeAdder.css';
 
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
+import { addActivity } from '../../../../RequestHelper/RequestHelper';
 
 const ActivityTypeAdder = () => {
+    const { token } = useContext(ApplicationContext);
+    const addQuery = useMutation(addActivity);
     const [, forceUpdate] = useState();
     const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
     const [activityName, setActivityName] = useState('');
@@ -24,6 +30,8 @@ const ActivityTypeAdder = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
+            addQuery.mutate({activityName, slowSpeedMet : slowSpeedMET, mediumSpeedMet: mediumSpeedMET, 
+                fastSpeedMet: fastSpeedMET, token});
             alert('Dodano typ aktywności');
             resetInputs();
         }
