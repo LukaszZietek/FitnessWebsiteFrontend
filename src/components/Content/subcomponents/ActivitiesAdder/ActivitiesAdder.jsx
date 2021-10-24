@@ -1,21 +1,82 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
+import { useQuery, useMutation } from 'react-query';
 
 import './ActivitiesAdder.css';
 
-import {ACTIVITY_TYPE_TRANSLATION_DICT, ACTIVITY_SPEED_TRANSLATION_DICT} from '../ActivitiesTranslationDict';
+import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { getUserInfo, addUserActivity, getActivities } from '../../../../RequestHelper/RequestHelper';
+import { SUCCESS_CODE } from '../../../../common/StatusCodes';
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
+import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
+import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
+import { FAST, MEDIUM, SLOW } from '../../../../common/ActivitySpeed';
 
 const ActivitiesAdder = () => {
+    const { token, userId } = useContext(ApplicationContext);
     const [, forceUpdate] = useState();
     const simpleValidator = useRef(CreateSimpleReactValidator(forceUpdate));
-    const [burnedCalories, setBurnedCalories] = useState(200);
-    const [activityType, setActivityType] = useState('');
+    const [burnedCalories, setBurnedCalories] = useState(0);
+    const [activityId, setActivityId] = useState(0);
     const [activityTime, setActivityTime] = useState(1);
-    const [activitySpeed, setActivitySpeed] = useState();
+    const [activitySpeed, setActivitySpeed] = useState(0);
+    const [userInfo, setUserInfo] = useState({});
+    const [activitiesList, setActivitiesList] = useState([]);
+    const addQuery = useMutation(addUserActivity);
+    const { error, isLoading : userIsLoading, isError: userIsError } = useQuery('getUserInfo', () => getUserInfo(userId, token),
+     { onSuccess: (response) => {
+        if (response.status === SUCCESS_CODE) {
+            const { data } = response;
+            setUserInfo(data);
+        }
+    }});
+    const { error: activitiesError , isLoading: activitiesIsLoading, isError: activitiesIsError } = useQuery('getActivities',
+     getActivities, { onSuccess: (response) => {
+        if (response.status === SUCCESS_CODE) {
+            const { data } = response;
+            setActivitiesList([...data]);
+        }
+    }});
 
-    const handleSelectChange = e => setActivityType(e.target.value);
-    const handleActivityTimeChange = e => setActivityTime(e.target.value);
-    const handleActivitySpeedChange = e => setActivitySpeed(e.target.value);
+    React.useEffect(() => {
+        const computeBurnedCalories = () => {
+            if (!(activityId && activityTime && (activitySpeed === SLOW || activitySpeed === MEDIUM || activitySpeed === FAST))) {
+                return;
+            }
+            var met = 0;
+            var item = activitiesList.find( item => item.id === activityId);
+            if (!item) {
+                return;
+            }
+            if (activitySpeed === SLOW) {
+                met = item.slowSpeedMet;
+            }
+            if (activitySpeed === MEDIUM) {
+                met = item.mediumSpeedMet;
+            }
+            if (activitySpeed === FAST) {
+                met = item.fastSpeedMet;
+            }
+            setBurnedCalories(parseInt(userInfo.weight * met * activityTime / 60));
+        };
+        computeBurnedCalories();
+    }, [activityId, activityTime, activitySpeed, activitiesList, userInfo]);
+
+    if(activitiesIsLoading || userIsLoading){
+        return <RequestLoadingViewer/>;
+    }
+    if(userIsError || activitiesIsError){
+        return <RequestErrorViewer errorMessage={error ? error.message : activitiesError.message} />;
+    }
+
+    const handleSelectChange = e => {
+        setActivityId(parseInt(e.target.value));
+    };
+    const handleActivityTimeChange = e => {
+        setActivityTime(e.target.value);
+    };
+    const handleActivitySpeedChange = e => {
+        setActivitySpeed(parseInt(e.target.value));  
+    };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
@@ -24,21 +85,26 @@ const ActivitiesAdder = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
+            addQuery.mutate({activityId: activityId, activityTime, activitySpeed, burnedCalories, token});
             alert('Dodano aktywność');
             resetInputs();
         }
-    }
+    };
 
     const handleOnCancel = () => {
         resetInputs();
-    }
+    };
 
     const resetInputs = () => {
         setBurnedCalories(0);
         setActivityTime(1);
-        setActivityType('');
-        setActivitySpeed();
-    }
+        setActivityId('');
+        setActivitySpeed(0);
+    };
+
+    const selectOptions = activitiesList.map(item => (
+        <option key={item.id} value={item.id}>{item.name}</option>
+    ));
 
     return (
         <div className="activities-container">
@@ -47,15 +113,13 @@ const ActivitiesAdder = () => {
                 <div>
                     <label>
                         Rodzaj aktywności:
-                        <select name="type" onChange={handleSelectChange} value={activityType}>
-                            <option value=""></option>
-                            <option value="running">{ACTIVITY_TYPE_TRANSLATION_DICT['running']}</option>
-                            <option value="jumping-rope">{ACTIVITY_TYPE_TRANSLATION_DICT['jumping-rope']}</option>
-                            <option value="cycling">{ACTIVITY_TYPE_TRANSLATION_DICT['cycling']}</option>
-                            <option value="strength-training">{ACTIVITY_TYPE_TRANSLATION_DICT['strength-training']}</option>
+                        <select name="type" onChange={handleSelectChange} value={activityId}>
+                            <option value={0}></option>
+                            {selectOptions}
                         </select>
                     </label>
-                    <p className="validator-message">{simpleValidator.current.message('rodzaj aktywności', activityType, 'required|in:running,jumping-rope,cycling,strength-training')}</p>
+                    <p className="validator-message">{simpleValidator.current.message('rodzaj aktywności', activityId,
+                     'required')}</p>
                 </div>
                 <div>
                     <label>
@@ -66,16 +130,16 @@ const ActivitiesAdder = () => {
                 </div>
                 <div>
                     Tempo aktywności: <br/>
-                    <input type="radio" id="slow" value="slow" checked={activitySpeed === "slow"} 
+                    <input type="radio" id="slow" value={SLOW} checked={activitySpeed === SLOW} 
                         onChange={handleActivitySpeedChange} />
-                    <label htmlFor="slow">{ACTIVITY_SPEED_TRANSLATION_DICT['slow']}</label> <br/>
-                    <input type="radio" id="medium" value="medium" checked={activitySpeed === "medium"} 
+                    <label htmlFor="slow">Wolne</label> <br/>
+                    <input type="radio" id="medium" value={MEDIUM} checked={activitySpeed === MEDIUM} 
                         onChange={handleActivitySpeedChange} />
-                    <label htmlFor="medium">{ACTIVITY_SPEED_TRANSLATION_DICT['medium']}</label> <br/>
-                    <input type="radio" id="fast" value="fast" checked={activitySpeed === "fast"} 
+                    <label htmlFor="medium">Umiarkowane</label> <br/>
+                    <input type="radio" id="fast" value={FAST} checked={activitySpeed === FAST} 
                         onChange={handleActivitySpeedChange} />
-                    <label htmlFor="fast">{ACTIVITY_SPEED_TRANSLATION_DICT['fast']}</label>
-                    <p className="validator-message">{simpleValidator.current.message('tempo aktywności', activitySpeed, 'required|in:slow,medium,fast')}</p>
+                    <label htmlFor="fast">Szybkie</label>
+                    <p className="validator-message">{simpleValidator.current.message('tempo aktywności', activitySpeed, 'required')}</p>
                 </div>
                 <div>
                     <h3>Spalone kalorie [kcal]: </h3> {burnedCalories}

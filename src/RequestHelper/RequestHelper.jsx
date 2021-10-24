@@ -34,6 +34,18 @@ export const getUserActivites = async (userId, token, activityDate) => {
     return response;
 };
 
+export const addUserActivity = async ({activityId, activityTime, activitySpeed, burnedCalories, token}) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.post('/api/user-activity', {duration: activityTime, speed: activitySpeed, burnedCalories, activityId});
+    return response;
+};
+
+export const deleteUserActivity = async ({userActivityId, token}) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.delete(`/api/user-activity/${userActivityId}`);
+    return response;
+}
+
 export const registerAccount = async (obj) => {
     const response = await request.post('/api/user/register', obj);
     return response;

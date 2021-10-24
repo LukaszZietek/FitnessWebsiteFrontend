@@ -1,30 +1,73 @@
 import React, {useState, useContext} from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 import './ActivitiesList.css';
 
-import { ACTIVITY_TYPE_TRANSLATION_DICT, ACTIVITY_SPEED_TRANSLATION_DICT } from '../ActivitiesTranslationDict';
 import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../../../DateUtilities';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
-import { getUserActivites } from '../../../../RequestHelper/RequestHelper';
+import { deleteUserActivity, getUserActivites } from '../../../../RequestHelper/RequestHelper';
 import { SUCCESS_CODE } from '../../../../common/StatusCodes';
 
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
+import { FAST, MEDIUM, SLOW } from '../../../../common/ActivitySpeed';
 
 const ActivitiesList = () => {
-    const [userActivities, setUserActivities] = useState([]);
-    const [activityDate, setActivityDate] = useState(getCurrentDate());
+    const [ userActivities, setUserActivities ] = useState([]);
+    const [ activityDate, setActivityDate ] = useState(getCurrentDate());
     const { userId, token } = useContext(ApplicationContext);
-    const totallyBurnedCalories = 1000;
-    const averageActivitySpeed = "Umiarkowane";
-    const averageActivityTime = 200;
-    const { error, isLoading, isError } = useQuery('getUserActivities', () => getUserActivites(userId, token, activityDate), { onSuccess: (response) => {
+    const [ totallyBurnedCalories, setTotallyBurnedCalories ] = useState(0);
+    const [ commonActivitySpeed, setCommonActivitySpeed ] = useState('brak danych');
+    const [ averageActivityTime, setAverageActivityTime ]  = useState(0);
+    const deleteQuery = useMutation(deleteUserActivity);
+    const { error, isLoading, isError, refetch } = useQuery('getUserActivities', () => getUserActivites(userId, token, activityDate), { onSuccess: (response) => {
         if (response.status === SUCCESS_CODE) {
             const { data } = response;
             setUserActivities([...data]);
         }
     }});
+
+    React.useEffect(() => {
+        const computeTotallyBurnedCalories = () => {
+            var burnedCalories = userActivities.reduce((prev, cur) => {
+                return prev + cur.burnedCalories;
+            }, 0);
+            setTotallyBurnedCalories(burnedCalories);
+        };
+    
+        const computeCommonSpeed = () => {
+            var speedAmount = [{name: 'wolne', value: userActivities.filter(item => item.speed === SLOW).length},
+                {name: 'umiarkowane', value: userActivities.filter(item => item.speed === MEDIUM).length},
+                {name: 'szybkie', value: userActivities.filter(item => item.speed === FAST).length}];
+            var maxValue = Math.max.apply(Math, speedAmount.map(item => item.value));
+            if (maxValue === 0) {
+                setCommonActivitySpeed('brak danych');
+                return;
+            }
+            var maxAmountArray = speedAmount.filter(item => item.value === maxValue);
+            setCommonActivitySpeed(maxAmountArray.map(item => item.name).join("/"));
+        };
+    
+        const computeAverageActivityTime = () => {
+            var activityTime = userActivities.reduce((prev, cur) => {
+                return prev + cur.duration;
+            }, 0);
+            if (activityTime)
+            {
+                activityTime = parseInt(activityTime / userActivities.length, 10);
+                setAverageActivityTime(activityTime);
+                return;
+            }
+            setAverageActivityTime(0);
+        };
+        computeTotallyBurnedCalories();
+        computeAverageActivityTime();
+        computeCommonSpeed();
+    }, [userActivities]);
+
+    React.useEffect(() => {
+        refetch();
+    }, [activityDate, refetch]);
 
     if(isLoading){
         return <RequestLoadingViewer/>;
@@ -41,13 +84,26 @@ const ActivitiesList = () => {
         }
      };
 
-    const deleteItem = (id) => setUserActivities((prevState) => prevState.filter(item => item.id !== id));
+    const deleteItem = (id) => {
+        deleteQuery.mutate({userActivityId: id, token});
+        setUserActivities((prevState) => prevState.filter(item => item.id !== id));
+    };
+
+    const getActivitySpeedName = (item) => {
+        if (item === SLOW) {
+            return "wolne";
+        }
+        if (item === MEDIUM) {
+            return "umiarkowane";
+        }
+        return "szybkie";
+    }
 
     const activitiesRow = userActivities.map(item => (
         <tr key={item.id}>
-            <th>{ACTIVITY_TYPE_TRANSLATION_DICT[`${item.activityType}`]}</th>
-            <th>{item.activityTime}</th>
-            <th>{ACTIVITY_SPEED_TRANSLATION_DICT[`${item.activitySpeed}`]}</th>
+            <th>{item.activity.name}</th>
+            <th>{item.duration}</th>
+            <th>{getActivitySpeedName(item.speed)}</th>
             <th>{item.burnedCalories}</th>
             <th>
                 <button className="button delete-button" onClick={() => deleteItem(item.id)}>
@@ -86,8 +142,8 @@ const ActivitiesList = () => {
                         <th>{averageActivityTime}</th>
                     </tr>
                     <tr>
-                        <th className="font-weight-b">Średnie tempo aktywności</th>
-                        <th>{averageActivitySpeed}</th>
+                        <th className="font-weight-b">Najczęstsze tempo aktywności</th>
+                        <th>{commonActivitySpeed}</th>
                     </tr>
                 </tbody>
             </table>

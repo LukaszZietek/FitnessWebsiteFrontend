@@ -1,7 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
 import { useQuery, useMutation } from 'react-query';
 
-import { ACTIVITY_TYPE_TRANSLATION_DICT } from '../ActivitiesTranslationDict';
 import { getActivities, deleteActivity } from '../../../../RequestHelper/RequestHelper';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 
@@ -51,7 +50,7 @@ const ActivityTypeDeleter = () => {
 
     const selectOptions = activityTypes.map(item => (
         <option key={item.id} value={item.name}>
-            {ACTIVITY_TYPE_TRANSLATION_DICT[`${item.name}`]}
+            {item.name}
         </option>
     ));
 
