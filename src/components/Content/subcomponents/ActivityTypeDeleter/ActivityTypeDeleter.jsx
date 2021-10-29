@@ -9,7 +9,7 @@ import './ActivityTypeDeleter.css';
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
-import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+import { NO_CONTENT, SUCCESS_CODE } from '../../../../common/StatusCodes';
 
 const ActivityTypeDeleter = () => {
     const [activityTypes, setActivityTypes] = useState([]);
@@ -41,11 +41,19 @@ const ActivityTypeDeleter = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
-            deleteQuery.mutate({id: activityTypes.find(element => element.name === activityType).id, token});
-            setActivityTypes(prevState => prevState.filter(item => item.name !== activityType));
-            alert(`Usunieto typ aktywności: ${activityType}`);
-            setActivityType('');
-            simpleValidator.current.hideMessages();
+            deleteQuery.mutate({id: activityTypes.find(element => element.name === activityType).id, token}, {onSuccess: (response) => {
+                if (response.status === NO_CONTENT)
+                {
+                    setActivityTypes(prevState => prevState.filter(item => item.name !== activityType));
+                    alert(`Usunieto typ aktywności: ${activityType}`);
+                    setActivityType('');
+                    simpleValidator.current.hideMessages();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }});
         }
     }
 

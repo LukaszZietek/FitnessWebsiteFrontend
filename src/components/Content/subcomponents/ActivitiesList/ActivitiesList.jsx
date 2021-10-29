@@ -6,7 +6,7 @@ import './ActivitiesList.css';
 import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../../../DateUtilities';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 import { deleteUserActivity, getUserActivities } from '../../../../RequestHelper/RequestHelper';
-import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+import { NO_CONTENT, SUCCESS_CODE } from '../../../../common/StatusCodes';
 
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
@@ -85,8 +85,16 @@ const ActivitiesList = () => {
      };
 
     const deleteItem = (id) => {
-        deleteQuery.mutate({userActivityId: id, token});
-        setUserActivities((prevState) => prevState.filter(item => item.id !== id));
+        deleteQuery.mutate({userActivityId: id, token}, {onSuccess: (response) => {
+            if (response.status === NO_CONTENT)
+            {
+                setUserActivities((prevState) => prevState.filter(item => item.id !== id));
+            } else {
+                alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+            }
+        }, onError: (error) => {
+            alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+        }});
     };
 
     const getActivitySpeedName = (item) => {

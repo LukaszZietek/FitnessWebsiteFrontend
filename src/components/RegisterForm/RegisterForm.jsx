@@ -6,6 +6,7 @@ import CreateSimpleReactValidator from '../Content/SimpleValidatorTranslation';
 
 import { getPreviousCenturyDate, getMaxBirthDate, checkIfDateIsBetweenTwoDates } from '../DateUtilities';
 import { registerAccount } from '../../RequestHelper/RequestHelper';
+import { SUCCESS_CODE } from '../../common/StatusCodes';
 
 const RegisterForm = ({handleOnClose, isModalOpen}) => {
     const registerQuery = useMutation(registerAccount);
@@ -58,9 +59,17 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
             forceUpdate(1);
         } else {
             console.log(`${username}, ${password}, ${birthDate}, ${email} `);
-            registerQuery.mutate({username, password, email, userInfo: {birthDate}});
-            alert('Konto założone');
-            resetInputStates();
+            registerQuery.mutate({username, password, email, userInfo: {birthDate}}, {onSuccess: (response) => {
+                if (response.status === SUCCESS_CODE)
+                {
+                    alert('Konto założone');
+                    resetInputStates();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }});
         }
     }
 

@@ -6,6 +6,7 @@ import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
 import { useMutation } from 'react-query';
 import { changeUserPassword } from '../../../../RequestHelper/RequestHelper';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { NO_CONTENT } from '../../../../common/StatusCodes';
 
 const PasswordChanger = () => {
     const { token } = useContext(ApplicationContext);
@@ -28,9 +29,17 @@ const PasswordChanger = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
-            changePasswordQuery.mutate({ oldPassword, newPassword, token })
-            alert('Hasło zmienione');
-            resetInputStates();
+            changePasswordQuery.mutate({ oldPassword, newPassword, token }, {onSuccess: (response) => {
+                if (response.status === NO_CONTENT)
+                {
+                    alert('Hasło zmienione');
+                    resetInputStates();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }})
         }
     }
 

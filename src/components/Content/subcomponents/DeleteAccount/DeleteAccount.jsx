@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 import { deleteUser } from '../../../../RequestHelper/RequestHelper';
+import { NO_CONTENT } from '../../../../common/StatusCodes';
 
 import './DeleteAccount.css';
 
@@ -19,10 +20,18 @@ const DeleteAccount = () => {
     }
 
     const handleSubmitButton = () => {
-        deleteAccount.mutate(token);
-        resetContext();
-        alert('Konto usunieto');
-        history.push('/');
+        deleteAccount.mutate(token, {onSuccess: (response) => {
+            if (response.status === NO_CONTENT)
+            {
+                resetContext();
+                alert('Konto usunieto');
+                history.push('/');
+            } else {
+                alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+            }
+        }, onError: (error) => {
+            alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+        }});
     }
     const handleCancelButton = () => {
         history.push('/');

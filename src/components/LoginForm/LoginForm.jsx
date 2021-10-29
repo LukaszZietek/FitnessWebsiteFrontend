@@ -7,6 +7,7 @@ import './LoginForm.css';
 
 import { authorizeUser } from '../../RequestHelper/RequestHelper';
 import { ApplicationContext } from '../../ApplicationContext/ApplicationProvider';
+import { SUCCESS_CODE } from '../../common/StatusCodes';
 
 const LoginForm = ({handleOnClose, isModalOpen}) => {
     const [login, setLogin] = useState('');
@@ -36,9 +37,17 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
-        loginQuery.mutate({login, password});
-        alert('Zalogowano');
-        handleOnClose();
+        loginQuery.mutate({login, password}, {onSuccess: (response) => {
+            if (response.status === SUCCESS_CODE)
+            {
+                alert('Zalogowano');
+                handleOnClose();
+            } else {
+                alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+            }
+        }, onError: (error) => {
+            alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+        }});
     }
 
     useEffect(() => {

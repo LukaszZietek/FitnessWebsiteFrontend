@@ -7,6 +7,7 @@ import { ApplicationContext } from '../../../../ApplicationContext/ApplicationPr
 
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
 import { addActivity } from '../../../../RequestHelper/RequestHelper';
+import { CREATED } from '../../../../common/StatusCodes';
 
 const ActivityTypeAdder = () => {
     const { token } = useContext(ApplicationContext);
@@ -31,9 +32,17 @@ const ActivityTypeAdder = () => {
             forceUpdate(1);
         } else {
             addQuery.mutate({activityName, slowSpeedMet : slowSpeedMET, mediumSpeedMet: mediumSpeedMET, 
-            fastSpeedMet: fastSpeedMET, token});
-            alert('Dodano typ aktywności');
-            resetInputs();
+            fastSpeedMet: fastSpeedMET, token}, {onSuccess: (response) => {
+                if (response.status === CREATED)
+                {
+                    alert('Dodano typ aktywności');
+                    resetInputs();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }});
         }
     };
 

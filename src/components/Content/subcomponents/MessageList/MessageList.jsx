@@ -6,16 +6,18 @@ import { MESSAGES_FROM_CLIENT } from '../../../../common/Paths';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 import { getMessagesFromClient } from '../../../../RequestHelper/RequestHelper';
 import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+import { ADMIN } from '../../../../common/UserRole';
 
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
+import SignInIsRequiredViewer from '../SignInIsRequiredViewer/SignInIsRequiredViewer';
 
 import './MessageList.css';
 
 
 const MessageList = () => {
     const [messages, setMessages] = useState([]);
-    const { token } = useContext(ApplicationContext);
+    const { token, role } = useContext(ApplicationContext);
     const { error, isLoading, isError } = useQuery('getMessages', () => getMessagesFromClient(token), { onSuccess: (response) => {
         if (response.status === SUCCESS_CODE) {
             const { data } = response;
@@ -43,7 +45,7 @@ const MessageList = () => {
         </tr>
     ));
 
-    return (
+    return !(role === ADMIN) ? <SignInIsRequiredViewer/> :(
         <div className="center-div">
             <h1>Lista zgłoszeń od klientów</h1>
             <table className="message-table">

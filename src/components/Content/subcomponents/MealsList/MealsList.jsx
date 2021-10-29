@@ -4,7 +4,7 @@ import { useMutation, useQuery } from 'react-query';
 import './MealsList.css';
 
 import { checkIfDateIsBetweenTwoDates, getCurrentDate, getPreviousMonthDate } from '../../../DateUtilities';
-import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+import { NO_CONTENT, SUCCESS_CODE } from '../../../../common/StatusCodes';
 import { deleteUserMeal, getUserInfo, getUserMeals } from '../../../../RequestHelper/RequestHelper';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 
@@ -107,8 +107,16 @@ const MealsList = () => {
     }
 
     const deleteItem = (id) => {
-        deleteQuery.mutate({mealId: id, token});
-        setUserMeals((prevState) => prevState.filter(item => item.id !== id));
+        deleteQuery.mutate({mealId: id, token}, {onSuccess: (response) => {
+            if (response.status === NO_CONTENT)
+            {
+                setUserMeals((prevState) => prevState.filter(item => item.id !== id))
+            } else {
+                alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+            }
+        }, onError: (error) => {
+            alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+        }});
     };
 
     const getQuantityUnitName = (item) => {

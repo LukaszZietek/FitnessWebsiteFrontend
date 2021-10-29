@@ -4,10 +4,11 @@ import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
 
 import './PersonalInfoAdder.css';
 
-import  {MAN, WOMAN } from '../../../../common/UserGender';
+import { MAN, WOMAN } from '../../../../common/UserGender';
 import { useMutation } from 'react-query';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 import { updateUserInfo } from '../../../../RequestHelper/RequestHelper';
+import { NO_CONTENT } from '../../../../common/StatusCodes';
 
 const PersonalInfoAdder = () => {
     const { userId, token } = useContext(ApplicationContext);
@@ -41,9 +42,17 @@ const PersonalInfoAdder = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
-            addQuery.mutate({weight, height, gender, token, userId});
-            alert('Dodano informacje');
-            resetInputs();
+            addQuery.mutate({weight, height, gender, token, userId}, {onSuccess: (response) => {
+                if (response.status === NO_CONTENT)
+                {
+                    alert('Dodano informacje');
+                    resetInputs();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }});
         }
     }
 

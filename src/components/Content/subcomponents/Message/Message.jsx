@@ -4,20 +4,22 @@ import { useHistory, useParams } from 'react-router';
 
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 import { MY_ACCOUNT_PATH } from '../../../../common/Paths';
-import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+import { NO_CONTENT, SUCCESS_CODE} from '../../../../common/StatusCodes';
+import { ADMIN } from '../../../../common/UserRole';
 
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 
 import './Message.css';
 import { getMessage, deleteMessage } from '../../../../RequestHelper/RequestHelper';
+import SignInIsRequiredViewer from '../SignInIsRequiredViewer/SignInIsRequiredViewer';
 
 const Message = () => {
     const [nameAndSurname, setNameAndSurname] = useState('');
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('');
     const [creationDate, setCreationDate] = useState('');
-    const { token } = useContext(ApplicationContext);
+    const { token, role } = useContext(ApplicationContext);
     const { id: messageId } = useParams();
     const history = useHistory();
     const deleteQuery = useMutation(deleteMessage);
@@ -39,12 +41,20 @@ const Message = () => {
     }
 
     const handleOnClick = () => {
-        deleteQuery.mutate({messageId, token});
-        alert(`Usunieto zgloszenie o id ${messageId}`);
-        history.push(`${MY_ACCOUNT_PATH}`);
+        deleteQuery.mutate({messageId, token}, {onSuccess: (response) => {
+            if (response.status === NO_CONTENT)
+            {
+                alert(`Usunieto zgloszenie o id ${messageId}`);
+                history.push(`${MY_ACCOUNT_PATH}`);
+            } else {
+                alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+            }
+        }, onError: (error) => {
+            alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+        }});
     }
 
-    return (
+    return !(role === ADMIN) ? <SignInIsRequiredViewer/> : (
         <div className="center-div">
             <h1>Zgłoszenie nr {messageId}</h1>
             <div className="message-grid">

@@ -7,6 +7,7 @@ import './Footer.css';
 import { ABOUT_US_PATH, CONTACT_PATH } from '../../common/Paths';
 import CreateSimpleReactValidator from '../Content/SimpleValidatorTranslation';
 import { sendClientMessage } from '../../RequestHelper/RequestHelper';
+import { CREATED } from '../../common/StatusCodes';
 
 const Footer = () => {
     const [, forceUpdate] = useState();
@@ -28,9 +29,17 @@ const Footer = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
-            addQuery.mutate({clientName: name, clientSurname: surname, clientEmail: emailAddress, content: message});
-            alert('Wiadomość wysłana, odpowiedź przyjdzie na maila');
-            resetInputs();
+            addQuery.mutate({clientName: name, clientSurname: surname, clientEmail: emailAddress, content: message}, {onSuccess: (response) => {
+                if (response.status === CREATED)
+                {
+                    alert('Wiadomość wysłana, odpowiedź przyjdzie na maila');
+                    resetInputs();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }});
         }
     }
 

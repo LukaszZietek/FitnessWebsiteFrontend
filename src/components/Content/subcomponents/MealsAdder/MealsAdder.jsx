@@ -2,6 +2,7 @@ import React, { useState, useRef, useContext } from 'react';
 import { useMutation } from 'react-query';
 
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
+import { CREATED } from '../../../../common/StatusCodes';
 import { addUserMeal } from '../../../../RequestHelper/RequestHelper';
 
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
@@ -38,9 +39,17 @@ const MealsAdder = () => {
             forceUpdate(1);
         } else {
             addQuery.mutate({name: mealName, quantity: mealQuantity, quantityUnit, calories: mealCalories,
-                 proteins: mealProteins, carbohydrates: mealCarbohydrates, fats: mealFats, token});
-            alert('Dodano posiłek');
-            resetInputs();
+                 proteins: mealProteins, carbohydrates: mealCarbohydrates, fats: mealFats, token}, {onSuccess: (response) => {
+                    if (response.status === CREATED)
+                    {
+                        alert('Dodano posiłek');
+                        resetInputs();
+                    } else {
+                        alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                    }
+                }, onError: (error) => {
+                    alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+                }});
         }
     };
 
@@ -63,7 +72,7 @@ const MealsAdder = () => {
             <h1>Dodaj posiłek: </h1>
             <form onSubmit={handleOnSubmit} className="display-grid">
                 <div className="first-row f-column">
-                    <label for="mealName" className="m-right-10">Nazwa posiłku</label>
+                    <label htmlFor="mealName" className="m-right-10">Nazwa posiłku</label>
                 </div>
                 <div className="first-row s-column">
                     <input id="mealName" className="meal-adder-input full-input-width" type="text" maxLength="30" value={mealName} onChange={handleMealNameChange} />
@@ -73,7 +82,7 @@ const MealsAdder = () => {
                     </p>
                 </div>
                 <div className="second-row f-column">
-                    <label for="quantity" className="m-right-10">Ilość</label>
+                    <label htmlFor="quantity" className="m-right-10">Ilość</label>
                 </div>
                 <div className="second-row s-column">
                     <input id="quantity" type="number" className="meal-adder-input half-input-width" value={mealQuantity} onChange={handleMealQuantityChange}
@@ -93,7 +102,7 @@ const MealsAdder = () => {
                     </p>
                 </div>
                 <div className="third-row f-column">
-                    <label for="calories" className="m-right-10">Kaloryczność posiłku [kcal]</label> 
+                    <label htmlFor="calories" className="m-right-10">Kaloryczność posiłku [kcal]</label> 
                 </div>
                 <div className="third-row s-column">
                     <input id="calories" className="meal-adder-input full-input-width" type="number" value={mealCalories} onChange={handleMealCaloriesChange}
@@ -104,7 +113,7 @@ const MealsAdder = () => {
                     </p>
                 </div>
                 <div className="fourth-row f-column">
-                    <label for="proteins" className="m-right-10">Ilość białka [g]</label> 
+                    <label htmlFor="proteins" className="m-right-10">Ilość białka [g]</label> 
                 </div>
                 <div className="fourth-row s-column">
                     <input id="proteins" className="meal-adder-input full-input-width" type="number" value={mealProteins} onChange={handleMealProteinsChange}
@@ -115,7 +124,7 @@ const MealsAdder = () => {
                     </p>
                 </div>
                 <div className="fifth-row f-column">
-                    <label for="fats" className="m-right-10">Ilość tłuszczy [g]</label> 
+                    <label htmlFor="fats" className="m-right-10">Ilość tłuszczy [g]</label> 
                 </div>
                 <div className="fifth-row s-column">
                     <input id="fats" className="meal-adder-input full-input-width" type="number" value={mealFats} onChange={handleMealFatsChange}
@@ -126,7 +135,7 @@ const MealsAdder = () => {
                     </p>
                 </div>
                 <div className="sixth-row f-column">
-                    <label for="carbohydrates" className="m-right-10">Ilość węglowodanów [g]</label> 
+                    <label htmlFor="carbohydrates" className="m-right-10">Ilość węglowodanów [g]</label> 
                 </div>
                 <div className="sixth-row s-column">
                     <input id="carbohydrates" className="meal-adder-input full-input-width" type="number" value={mealCarbohydrates} onChange={handleMealCarbohydratesChange}

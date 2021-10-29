@@ -1,7 +1,6 @@
 import React from 'react';
 
 const RequestErrorViewer = (errorMessage) => {
-    console.log(errorMessage);
     return (
         <div className="center-div">
             <h1>Wystąpił błąd: {errorMessage}</h1>

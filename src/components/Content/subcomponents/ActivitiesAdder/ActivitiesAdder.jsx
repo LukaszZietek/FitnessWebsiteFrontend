@@ -5,7 +5,7 @@ import './ActivitiesAdder.css';
 
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
 import { getUserInfo, addUserActivity, getActivities } from '../../../../RequestHelper/RequestHelper';
-import { SUCCESS_CODE } from '../../../../common/StatusCodes';
+import { CREATED, SUCCESS_CODE } from '../../../../common/StatusCodes';
 import CreateSimpleReactValidator from '../../SimpleValidatorTranslation';
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
 import RequestLoadingViewer from '../RequestLoadingViewer/RequestLoadingViewer';
@@ -85,9 +85,17 @@ const ActivitiesAdder = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
-            addQuery.mutate({activityId: activityId, activityTime, activitySpeed, burnedCalories, token});
-            alert('Dodano aktywność');
-            resetInputs();
+            addQuery.mutate({activityId: activityId, activityTime, activitySpeed, burnedCalories, token}, {onSuccess: (response) => {
+                if (response.status === CREATED)
+                {
+                    alert('Dodano aktywność');
+                    resetInputs();
+                } else {
+                    alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                }
+            }, onError: (error) => {
+                alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
+            }});
         }
     };
 
@@ -110,49 +118,9 @@ const ActivitiesAdder = () => {
     return (
         <div className="activities-container">
             <h1>Dodaj aktywność: </h1>
-            {/* <form onSubmit={handleOnSubmit}>
-                <div>
-                    <label>
-                        Rodzaj aktywności:
-                        <select name="type" onChange={handleSelectChange} value={activityId}>
-                            <option value={0}></option>
-                            {selectOptions}
-                        </select>
-                    </label>
-                    <p className="validator-message">{simpleValidator.current.message('rodzaj aktywności', activityId,
-                     'required')}</p>
-                </div>
-                <div>
-                    <label>
-                        Czas aktywności [min]:
-                        <input name="time" type="number" min="1" max="400" value={activityTime} onChange={handleActivityTimeChange} />
-                    </label>
-                    <p className="validator-message">{simpleValidator.current.message('czas aktywności', activityTime, 'required|numeric|min:1,num|max:400,num')}</p>
-                </div>
-                <div>
-                    Tempo aktywności: <br/>
-                    <input type="radio" id="slow" value={SLOW} checked={activitySpeed === SLOW} 
-                        onChange={handleActivitySpeedChange} />
-                    <label htmlFor="slow">Wolne</label> <br/>
-                    <input type="radio" id="medium" value={MEDIUM} checked={activitySpeed === MEDIUM} 
-                        onChange={handleActivitySpeedChange} />
-                    <label htmlFor="medium">Umiarkowane</label> <br/>
-                    <input type="radio" id="fast" value={FAST} checked={activitySpeed === FAST} 
-                        onChange={handleActivitySpeedChange} />
-                    <label htmlFor="fast">Szybkie</label>
-                    <p className="validator-message">{simpleValidator.current.message('tempo aktywności', activitySpeed, 'required')}</p>
-                </div>
-                <div>
-                    <h3>Spalone kalorie [kcal]: </h3> {burnedCalories}
-                </div>
-                <div>
-                    <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>
-                    <button type="submit" className="button add-button">Dodaj</button>
-                </div>
-            </form> */}
             <form onSubmit={handleOnSubmit} className="display-grid">
                 <div className="first-row f-column">
-                    <label for="activity-id" className="m-right-10">Rodzaj aktywności</label>
+                    <label htmlFor="activity-id" className="m-right-10">Rodzaj aktywności</label>
                 </div>
                 <div className="first-row s-column">
                     <select id="activity-id" className="activities-input" name="type" onChange={handleSelectChange} value={activityId}>
@@ -164,7 +132,7 @@ const ActivitiesAdder = () => {
                 </div>
 
                 <div className="second-row f-column">
-                    <label for="activity-time" className="m-right-10">Czas aktywności [min]</label>
+                    <label htmlFor="activity-time" className="m-right-10">Czas aktywności [min]</label>
                 </div>
                 <div className="second-row s-column">
                     <input id="activity-time" className="activities-input" name="time" type="number" min="1" max="400" value={activityTime} onChange={handleActivityTimeChange} />
