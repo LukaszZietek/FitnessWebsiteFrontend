@@ -97,7 +97,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                         Data urodzenia:
                         <br/>
                         <input type="date" value={birthDate} onChange={handleOnBirthDateChange} 
-                            min={getPreviousCenturyDate()} max={getMaxBirthDate()} />
+                            min={getPreviousCenturyDate()} max={getMaxBirthDate()} className="modal-input" />
                         {ifBirthDateWrong && <p className="validator-message">Podano złą date urodzenia</p>}
                     </label>
                     <br/>

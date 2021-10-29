@@ -2,3 +2,44 @@
   margin: 50px;
   text-align: center;
 }
+
+.activities-container .display-grid button {
+  height: 40px;
+  width: 190px;
+}
+
+.activities-container .display-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-column-gap: 15px;
+}
+
+.activities-container .display-grid .f-column {
+  padding-top: 10px;
+  text-align: right;
+}
+
+.activities-container .display-grid .f-column-button {
+  text-align: right;
+}
+
+.activities-container .display-grid .s-column {
+  text-align: left;
+}
+
+.activities-input {
+  border-radius: 5px;
+  height: 25px;
+  padding: 5px 5px 5px 5px;
+  -ms-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 180px;
+}
+
+.activities-input .display-grid .m-right-10 {
+  margin-right: 10px;
+}

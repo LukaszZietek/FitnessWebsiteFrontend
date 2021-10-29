@@ -110,7 +110,7 @@ const ActivitiesAdder = () => {
     return (
         <div className="activities-container">
             <h1>Dodaj aktywność: </h1>
-            <form onSubmit={handleOnSubmit}>
+            {/* <form onSubmit={handleOnSubmit}>
                 <div>
                     <label>
                         Rodzaj aktywności:
@@ -147,6 +147,58 @@ const ActivitiesAdder = () => {
                 </div>
                 <div>
                     <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>
+                    <button type="submit" className="button add-button">Dodaj</button>
+                </div>
+            </form> */}
+            <form onSubmit={handleOnSubmit} className="display-grid">
+                <div className="first-row f-column">
+                    <label for="activity-id" className="m-right-10">Rodzaj aktywności</label>
+                </div>
+                <div className="first-row s-column">
+                    <select id="activity-id" className="activities-input" name="type" onChange={handleSelectChange} value={activityId}>
+                        <option value={0}></option>
+                        {selectOptions}
+                    </select>
+                    <p className="validator-message">{simpleValidator.current.message('rodzaj aktywności', activityId,
+                        'required')}</p>
+                </div>
+
+                <div className="second-row f-column">
+                    <label for="activity-time" className="m-right-10">Czas aktywności [min]</label>
+                </div>
+                <div className="second-row s-column">
+                    <input id="activity-time" className="activities-input" name="time" type="number" min="1" max="400" value={activityTime} onChange={handleActivityTimeChange} />
+                    <p className="validator-message">{simpleValidator.current.message('czas aktywności',
+                     activityTime, 'required|numeric|min:1,num|max:400,num')}</p>
+                </div>
+
+                <div className="third-row f-column">
+                    <label className="m-right-10">Tempo aktywności</label>
+                </div>
+                <div className="third-row s-column">
+                    <input type="radio" id="slow" value={SLOW} checked={activitySpeed === SLOW} 
+                        onChange={handleActivitySpeedChange} />
+                    <label htmlFor="slow">Wolne</label> <br/>
+                    <input type="radio" id="medium" value={MEDIUM} checked={activitySpeed === MEDIUM} 
+                        onChange={handleActivitySpeedChange} />
+                    <label htmlFor="medium">Umiarkowane</label> <br/>
+                    <input type="radio" id="fast" value={FAST} checked={activitySpeed === FAST} 
+                        onChange={handleActivitySpeedChange} />
+                    <label htmlFor="fast">Szybkie</label>
+                    <p className="validator-message">{simpleValidator.current.message('tempo aktywności', activitySpeed, 'required')}</p>
+                </div>
+
+                <div className="fourth-row f-column-button">
+                    <h3>Spalone kalorie [kcal]: </h3>
+                </div>
+                <div className="fourth-row s-column">
+                    <h3>{burnedCalories} </h3>
+                </div>
+
+                <div className="fifth-row f-column-button">
+                <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>
+                </div>
+                <div className="fifth-row s-column">
                     <button type="submit" className="button add-button">Dodaj</button>
                 </div>
             </form>

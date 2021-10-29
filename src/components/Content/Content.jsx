@@ -10,7 +10,7 @@ import AboutUs from './subcomponents/AboutUs/AboutUs';
 import DailyReports from './subcomponents/DailyReports/DailyReports';
 import WeeklyReports from './subcomponents/WeeklyReports/WeeklyReports';
 import MonthlyReports from './subcomponents/MonthlyReports/MonthlyReports';
-import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, WEEKLY_REPORTS_PATH, MONTHLY_REPORTS_PATH, DAILY_REPORTS_PATH, REPORT_PATH, 
+import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, WEEKLY_REPORTS_PATH, MONTHLY_REPORTS_PATH, REPORT_PATH, 
 CONTACT_PATH, ABOUT_US_PATH, ADD_ACTIVITIES_PATH, ACTIVITIES_PATH, MEALS_PATH, ADD_MEALS_PATH, MY_ACCOUNT_PATH, ADD_PERSONAL_INFO_PATH,
 MESSAGES_FROM_CLIENT, MESSAGE, ADD_NEW_ACTIVITY_TYPE_PATH, DELETE_ACTIVITY_TYPE_PATH} from '../../common/Paths';
 import ActivitiesAdder from './subcomponents/ActivitiesAdder/ActivitiesAdder';
