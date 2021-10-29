@@ -38,6 +38,7 @@ const PasswordChanger = () => {
         setOldPassword('');
         setNewPassword('');
         setRepeatedPassword('');
+        simpleValidator.current.hideMessages();
     }
 
     return (

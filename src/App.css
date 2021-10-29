@@ -122,3 +122,15 @@
 .fourth-row {
   grid-row: 4;
 }
+
+.fifth-row {
+  grid-row: 5;
+}
+
+.sixth-row {
+  grid-row: 6;
+}
+
+.seventh-row {
+  grid-row: 7;
+}

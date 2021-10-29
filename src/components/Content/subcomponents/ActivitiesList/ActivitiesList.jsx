@@ -5,7 +5,7 @@ import './ActivitiesList.css';
 
 import { getCurrentDate, getPreviousMonthDate, checkIfDateIsBetweenTwoDates} from '../../../DateUtilities';
 import { ApplicationContext } from '../../../../ApplicationContext/ApplicationProvider';
-import { deleteUserActivity, getUserActivites } from '../../../../RequestHelper/RequestHelper';
+import { deleteUserActivity, getUserActivities } from '../../../../RequestHelper/RequestHelper';
 import { SUCCESS_CODE } from '../../../../common/StatusCodes';
 
 import RequestErrorViewer from '../RequestErrorViewer/RequestErrorViewer';
@@ -20,7 +20,7 @@ const ActivitiesList = () => {
     const [ commonActivitySpeed, setCommonActivitySpeed ] = useState('brak danych');
     const [ averageActivityTime, setAverageActivityTime ]  = useState(0);
     const deleteQuery = useMutation(deleteUserActivity);
-    const { error, isLoading, isError, refetch } = useQuery('getUserActivities', () => getUserActivites(userId, token, activityDate), { onSuccess: (response) => {
+    const { error, isLoading, isError, refetch } = useQuery('getUserActivities', () => getUserActivities(userId, token, activityDate), { onSuccess: (response) => {
         if (response.status === SUCCESS_CODE) {
             const { data } = response;
             setUserActivities([...data]);

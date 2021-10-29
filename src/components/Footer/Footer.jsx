@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useMutation } from 'react-query';
 
 import './Footer.css';
 
 import { ABOUT_US_PATH, CONTACT_PATH } from '../../common/Paths';
 import CreateSimpleReactValidator from '../Content/SimpleValidatorTranslation';
+import { sendClientMessage } from '../../RequestHelper/RequestHelper';
 
 const Footer = () => {
     const [, forceUpdate] = useState();
@@ -13,6 +15,7 @@ const Footer = () => {
     const [surname, setSurname] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [message, setMessage] = useState('');
+    const addQuery = useMutation(sendClientMessage);
 
     const handleOnNameChange = e => setName(e.target.value);
     const handleOnSurnameChange = e => setSurname(e.target.value);
@@ -25,6 +28,7 @@ const Footer = () => {
             simpleValidator.current.showMessages();
             forceUpdate(1);
         } else {
+            addQuery.mutate({clientName: name, clientSurname: surname, clientEmail: emailAddress, content: message});
             alert('Wiadomość wysłana, odpowiedź przyjdzie na maila');
             resetInputs();
         }
@@ -35,6 +39,7 @@ const Footer = () => {
         setSurname('');
         setEmailAddress('');
         setMessage('');
+        simpleValidator.current.hideMessages();
     }
 
     return (
@@ -56,7 +61,7 @@ const Footer = () => {
 
                             <textarea className="footer-column-element footer-text-input" placeholder="Treść wiadomości..." value={message}
                                 onChange={handleOnMessageChange} />
-                            <p className="validator-message">{simpleValidator.current.message('treść wiadomości',message , 'required|min:20,num|max:250,num')}</p>
+                            <p className="validator-message">{simpleValidator.current.message('treść wiadomości', message , 'required|min:20,string|max:250,string')}</p>
                             <button className="footer-column-element-button" type="submit">Wyslij</button>
                     </form>
                 </div>

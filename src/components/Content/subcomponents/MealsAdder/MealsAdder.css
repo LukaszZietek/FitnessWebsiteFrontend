@@ -1,4 +1,58 @@
 .meals-adder-container {
-  margin: 50px;
+  margin-top: 50px;
   text-align: center;
+}
+
+.meals-adder-container button {
+  height: 40px;
+  width: 190px;
+}
+
+.display-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-column-gap: 15px;
+}
+
+.display-grid .f-column {
+  padding-top: 10px;
+  text-align: right;
+}
+
+.display-grid .f-column-button {
+  text-align: right;
+}
+
+.display-grid .s-column {
+  text-align: left;
+}
+
+.meal-adder-input {
+  border-radius: 5px;
+  height: 25px;
+  padding: 5px 5px 5px 5px;
+  -ms-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.half-input-width {
+  width: 116px;
+  border-width: 2px;
+}
+
+.select-input-width {
+  width: 50px;
+  border-width: 2px;
+}
+
+.full-input-width {
+  width: 180px;
+}
+
+.meals-adder-container .m-right-10 {
+  margin-right: 10px;
 }

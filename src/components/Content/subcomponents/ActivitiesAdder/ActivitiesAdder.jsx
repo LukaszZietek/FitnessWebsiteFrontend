@@ -100,6 +100,7 @@ const ActivitiesAdder = () => {
         setActivityTime(1);
         setActivityId('');
         setActivitySpeed(0);
+        simpleValidator.current.hideMessages();
     };
 
     const selectOptions = activitiesList.map(item => (

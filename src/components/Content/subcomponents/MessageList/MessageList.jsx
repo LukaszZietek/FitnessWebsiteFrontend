@@ -34,7 +34,7 @@ const MessageList = () => {
         <tr key={item.id}>
             <th>{`${item.clientName} ${item.clientSurname}`}</th>
             <th>{item.clientEmail}</th>
-            <th>{item.content}</th>
+            <th>{item.content.substring(0,25)}...</th>
             <th>{item.createdAt}</th>
             <th>{item.ifRead ? "Tak" : "Nie"}</th>
             <th>

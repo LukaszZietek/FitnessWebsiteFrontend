@@ -33,6 +33,11 @@
   font-size: 13.333px;
 }
 
+.header-link:focus,
+.header-link:active {
+  color: black;
+}
+
 .header-right-link,
 .header-right-link:focus,
 .header-link:active {
@@ -47,10 +52,21 @@
   font-size: 13.333px;
 }
 
+.header-right-link:focus,
+.header-link:active {
+  color: black;
+}
+
 .header-button:hover,
 .header-link:hover,
 .header-right-link:hover {
-  background-color: #696969;
+  background-color: orange;
+  color: black;
+}
+
+.navbar-active {
+  background-color: orange;
+  color: black;
 }
 
 .right-align {

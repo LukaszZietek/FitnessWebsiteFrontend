@@ -27,6 +27,7 @@ const PersonalInfoAdder = () => {
         setHeight(100);
         setWeight(30);
         setGender(DEFAULT_VALUE);
+        simpleValidator.current.hideMessages();
     }
 
     const handleOnCancel = () => {

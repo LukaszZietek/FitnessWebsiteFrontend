@@ -40,7 +40,7 @@ const Content = () => {
                 <Route path={DELETE_ACTIVITY_TYPE_PATH} component={ActivityTypeDeleter} />
                 <Route path={WEEKLY_REPORTS_PATH} component={WeeklyReports} />
                 <Route path={MONTHLY_REPORTS_PATH} component={MonthlyReports} />
-                <Route path={[REPORT_PATH, DAILY_REPORTS_PATH]} component={DailyReports} />
+                <Route path={REPORT_PATH} component={DailyReports} />
                 <Route path={CONTACT_PATH} component={Contact} />
                 <Route path={ABOUT_US_PATH} component={AboutUs} />
                 <Route path={ADD_ACTIVITIES_PATH} component={ActivitiesAdder} />

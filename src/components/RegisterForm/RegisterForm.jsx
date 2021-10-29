@@ -42,6 +42,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
         setIfBirthDateWrong('');
         setPassword('');
         setRepeatedPassword('');
+        simpleValidator.current.hideMessages();
     }
     
     const handleOnCloseModal = e => {

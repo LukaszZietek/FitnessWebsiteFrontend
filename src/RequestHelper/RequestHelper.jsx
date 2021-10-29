@@ -28,9 +28,16 @@ export const addActivity = async ({activityName, slowSpeedMet, mediumSpeedMet, f
     return response;
 };
 
-export const getUserActivites = async (userId, token, activityDate) => {
+export const getUserActivities = async (userId, token, activityDate) => {
     request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await request.get(`/api/user-activity/GetUserActivitiesFromGivenDate/${userId}?date=${activityDate}`);
+    return response;
+};
+
+export const getUserActivitiesForTimePeriod = async (userId, token, startDate, endDate) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.get(`/api/user-activity/GetUserActivitiesForTimePeriod/${userId}?` + 
+        `startDate=${startDate}&endDate=${endDate}`);
     return response;
 };
 
@@ -43,6 +50,31 @@ export const addUserActivity = async ({activityId, activityTime, activitySpeed, 
 export const deleteUserActivity = async ({userActivityId, token}) => {
     request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await request.delete(`/api/user-activity/${userActivityId}`);
+    return response;
+}
+
+export const getUserMeals = async (userId, token, mealsDate) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.get(`/api/user-meal/GetMealsFromGivenDate/${userId}?date=${mealsDate}`);
+    return response;
+};
+
+export const getUserMealsForTimePeriod = async (userId, token, startDate, endDate) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.get(`/api/user-meal/GetMealsForTimePeriod/${userId}?` + 
+        `startDate=${startDate}&endDate=${endDate}`);
+    return response;
+};
+
+export const deleteUserMeal = async ({mealId, token}) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.delete(`/api/user-meal/${mealId}`);
+    return response;
+};
+
+export const addUserMeal = async ({name, quantity, quantityUnit, calories, proteins, carbohydrates, fats, token}) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.post('api/user-meal', {name, quantity, quantityUnit, calories, proteins, carbohydrates, fats});
     return response;
 }
 
@@ -97,6 +129,11 @@ export const deleteMessage = async ({messageId, token}) => {
     const response = await request.delete(`/api/client-message/${messageId}`);
     return response;
 };
+
+export const sendClientMessage = async ({clientName, clientSurname, clientEmail, content}) => {
+    const response = await request.post('/api/client-message', {clientName, clientSurname, clientEmail, content});
+    return response;
+}
 
 
 

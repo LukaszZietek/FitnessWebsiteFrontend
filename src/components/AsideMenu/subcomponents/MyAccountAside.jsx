@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import '../AsideMenu.css';
 
@@ -13,22 +13,19 @@ const MyAccountAside = () => {
 
     const adminOptions = role === ADMIN ? (
         <>
-            <Link to={MESSAGES_FROM_CLIENT} className="aside-link">Zgłoszenia</Link>
-            <Link to={ADD_NEW_ACTIVITY_TYPE_PATH} className="aside-link">Dodaj typ aktywności</Link>
-            <Link to={DELETE_ACTIVITY_TYPE_PATH} className="aside-link">Usuń typ aktywności</Link>
+            <NavLink activeClassName="aside-active" exact to={MESSAGES_FROM_CLIENT} className="aside-link">Zgłoszenia</NavLink>
+            <NavLink activeClassName="aside-active" exact to={ADD_NEW_ACTIVITY_TYPE_PATH} className="aside-link">Dodaj typ aktywności</NavLink>
+            <NavLink activeClassName="aside-active" exact to={DELETE_ACTIVITY_TYPE_PATH} className="aside-link">Usuń typ aktywności</NavLink>
         </>
     ) : null;
 
     return (
         <div className="aside-div">
-            <Link to={MY_ACCOUNT_PATH} className="aside-link">Informacje</Link>
-            <Link to={CHANGE_PASSWORD_PATH} className="aside-link">Zmień hasło</Link>
-            <Link to={ADD_PERSONAL_INFO_PATH} className="aside-link">Dodaj informacje</Link>
-            <Link to={DELETE_ACCOUNT_PATH} className="aside-link">Usuń konto</Link>
-            <Link to={REPORT_PATH} className="aside-link">Moje raporty</Link>
-            {/* <Link to={MESSAGES_FROM_CLIENT} className="aside-link">Zgłoszenia</Link>
-            <Link to={ADD_NEW_ACTIVITY_TYPE_PATH} className="aside-link">Dodaj typ aktywności</Link>
-            <Link to={DELETE_ACTIVITY_TYPE_PATH} className="aside-link">Usuń typ aktywności</Link> */}
+            <NavLink activeClassName="aside-active" exact to={MY_ACCOUNT_PATH} className="aside-link">Informacje</NavLink>
+            <NavLink activeClassName="aside-active" exact to={CHANGE_PASSWORD_PATH} className="aside-link">Zmień hasło</NavLink>
+            <NavLink activeClassName="aside-active" exact to={ADD_PERSONAL_INFO_PATH} className="aside-link">Dodaj informacje</NavLink>
+            <NavLink activeClassName="aside-active" exact to={DELETE_ACCOUNT_PATH} className="aside-link">Usuń konto</NavLink>
+            <NavLink activeClassName="aside-active" exact to={REPORT_PATH} className="aside-link">Moje raporty</NavLink>
             {adminOptions}
         </div>
     );

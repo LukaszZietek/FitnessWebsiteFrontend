@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import '../AsideMenu.css';
 
@@ -9,8 +9,8 @@ const ActivitiesAside = () => {
     
     return (
         <div className="aside-div">
-            <Link to={ACTIVITIES_PATH} className="aside-link">Lista aktywności</Link>
-            <Link to={ADD_ACTIVITIES_PATH} className="aside-link">Dodaj aktywność</Link>
+            <NavLink activeClassName="aside-active" exact to={ACTIVITIES_PATH} className="aside-link">Lista aktywności</NavLink>
+            <NavLink activeClassName="aside-active" exact to={ADD_ACTIVITIES_PATH} className="aside-link">Dodaj aktywność</NavLink>
         </div>
     );
 };

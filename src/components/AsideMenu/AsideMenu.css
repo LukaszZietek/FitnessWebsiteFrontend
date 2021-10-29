@@ -30,6 +30,17 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.aside-link:focus,
+.aside-link:active {
+  color: black;
+}
+
 .aside-link:hover {
-  background-color: #696969;
+  background-color: orange;
+  color: black;
+}
+
+.aside-active {
+  background-color: orange;
+  color: black;
 }

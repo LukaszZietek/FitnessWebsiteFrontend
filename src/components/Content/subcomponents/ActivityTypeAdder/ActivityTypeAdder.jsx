@@ -31,7 +31,7 @@ const ActivityTypeAdder = () => {
             forceUpdate(1);
         } else {
             addQuery.mutate({activityName, slowSpeedMet : slowSpeedMET, mediumSpeedMet: mediumSpeedMET, 
-                fastSpeedMet: fastSpeedMET, token});
+            fastSpeedMet: fastSpeedMET, token});
             alert('Dodano typ aktywności');
             resetInputs();
         }
@@ -42,6 +42,7 @@ const ActivityTypeAdder = () => {
         setSlowSpeedMET(0);
         setMediumSpeedMET(0);
         setFastSpeedMET(0);
+        simpleValidator.current.hideMessages();
     };
 
     return (

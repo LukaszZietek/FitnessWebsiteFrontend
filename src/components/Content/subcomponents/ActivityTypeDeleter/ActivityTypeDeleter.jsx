@@ -45,6 +45,7 @@ const ActivityTypeDeleter = () => {
             setActivityTypes(prevState => prevState.filter(item => item.name !== activityType));
             alert(`Usunieto typ aktywności: ${activityType}`);
             setActivityType('');
+            simpleValidator.current.hideMessages();
         }
     }
 

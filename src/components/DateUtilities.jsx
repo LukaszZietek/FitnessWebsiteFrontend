@@ -15,6 +15,16 @@ export const getPreviousMonthDate = () => {
     let year = newDate.getFullYear();
 
     return `${year}-${month<10 ? `0${month}` : `${month}`}-${date}`;
+};
+
+export const getPreviousWeekDate = () => {
+    let newDate = new Date();
+    newDate.setDate(newDate.getDate() - 7);
+    let date = newDate.getDate();
+    let month = (newDate.getMonth() + 1) % 13;
+    let year = newDate.getFullYear();
+    console.log(`${year}-${month<10 ? `0${month}` : `${month}`}-${date}`);
+    return `${year}-${month<10 ? `0${month}` : `${month}`}-${date}`;
 }
 
 export const checkIfDateIsBetweenTwoDates = (minDate, maxDate, comparedDate) => {
@@ -29,7 +39,7 @@ export const checkIfDateIsBetweenTwoDates = (minDate, maxDate, comparedDate) => 
         return true;
     }
     return false; 
-}
+};
 
 export const getPreviousCenturyDate = () => {
     let newDate = new Date();
@@ -39,7 +49,7 @@ export const getPreviousCenturyDate = () => {
     let year = newDate.getFullYear();
 
     return `${year}-${month<10 ? `0${month}` : `${month}`}-${date}`;
-}
+};
 
 export const getMaxBirthDate = () => {
     let newDate = new Date();
@@ -49,4 +59,13 @@ export const getMaxBirthDate = () => {
     let year = newDate.getFullYear();
 
     return `${year}-${month<10 ? `0${month}` : `${month}`}-${date}`;
+};
+
+export const getNumberOfDaysBetweenTwoDates = (startDate, endDate) => {
+    let startDateObject = new Date(startDate);
+    let endDateObject = new Date(endDate);
+
+    const oneDay = 1000 * 60 * 60 * 24;
+    const returnValue = Math.round((endDateObject - startDateObject) / oneDay);
+    return returnValue;
 }

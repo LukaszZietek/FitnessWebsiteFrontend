@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LoginForm from '../LoginForm/LoginForm';
 
 import './NavBar.css';
@@ -36,7 +36,7 @@ const NavBar = () => {
     const userAccountNavBar = token ?
     (
         <div className="right-align">
-            <Link to={MY_ACCOUNT_PATH} className="header-right-link">MOJE KONTO</Link>
+            <NavLink activeClassName="navbar-active" to={MY_ACCOUNT_PATH} className="header-right-link">MOJE KONTO</NavLink>
             <button className="header-button" onClick={handleLogout}>WYLOGUJ</button>
         </div>
     ) : 
@@ -50,14 +50,9 @@ const NavBar = () => {
     return (
             <header className="header">
                 <Link to='' className="header-link"><img src={logo} alt="logo"/></Link>
-                <Link to={MEALS_PATH} className="header-link">POSIŁKI</Link>
-                <Link to={ACTIVITIES_PATH} className="header-link">AKTYWNOŚCI</Link>
-                <Link to={REPORT_PATH} className="header-link">RAPORTY</Link>
-                {/* <div className="right-align">
-                    <button className="header-button" onClick={handleOnClick}>LOGOWANIE</button>
-                    <button className="header-button" onClick={handleOnClick}>REJESTRACJA</button>
-                    <Link to={MY_ACCOUNT_PATH} className="header-right-link">MOJE KONTO</Link>
-                </div> */}
+                <NavLink activeClassName="navbar-active" to={MEALS_PATH} className="header-link">POSIŁKI</NavLink>
+                <NavLink activeClassName="navbar-active" to={ACTIVITIES_PATH} className="header-link">AKTYWNOŚCI</NavLink>
+                <NavLink activeClassName="navbar-active" to={REPORT_PATH} className="header-link">RAPORTY</NavLink>
                 {userAccountNavBar}
                 <LoginForm handleOnClose={handleOnLoginClose} isModalOpen={isLoginModalOpen}/>
                 <RegisterForm handleOnClose={handleOnRegisterClose} isModalOpen={isRegisterModalOpen} />
