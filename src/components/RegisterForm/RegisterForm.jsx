@@ -87,7 +87,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
             <form className="modal-form" method="post" onSubmit={handleOnSubmit}>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Nazwa użytkownika:
+                        Nazwa użytkownika
                         <br/>
                         <input type="text" value={username} onChange={handleOnUsernameChange} className="modal-input"/>
                         <p className="validator-message">{simpleValidator.current.message('nazwa użytkownika', username, 'required|min:5,string|max:20,string')}</p>
@@ -95,7 +95,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                 </div>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Email:
+                        Email
                         <br/>
                         <input type="text" value={email} onChange={handleOnEmailChange} className="modal-input"/>
                         <p className="validator-message">{simpleValidator.current.message('email', email, 'required|email')}</p>
@@ -103,7 +103,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                 </div>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Data urodzenia:
+                        Data urodzenia
                         <br/>
                         <input type="date" value={birthDate} onChange={handleOnBirthDateChange} 
                             min={getPreviousCenturyDate()} max={getMaxBirthDate()} className="modal-input" />
@@ -113,7 +113,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                 </div>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Hasło:
+                        Hasło
                         <br/>
                         <input type="password" value={password} onChange={handleOnPasswordChange} className="modal-input"/>
                         <p className="validator-message">{simpleValidator.current.message('hasło', password, 'required|min:6,string|max:20,string|alpha_num_dash')}</p>
@@ -121,7 +121,7 @@ const RegisterForm = ({handleOnClose, isModalOpen}) => {
                 </div>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Powtórz hasło:
+                        Powtórz hasło
                         <br/>
                         <input type="password" value={repeatedPassword} onChange={handleOnRepeatedPasswordChange}
                             className="modal-input"/>

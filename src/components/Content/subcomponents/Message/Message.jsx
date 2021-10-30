@@ -75,7 +75,7 @@ const Message = () => {
                     <textarea className="grid-textarea-input" value={message} disabled/>
                 </div>
                 <div className="third-row all-column">
-                    <button className="button delete-button full-width-button" onClick={handleOnClick}>
+                    <button className="button cancel-button full-width-button" onClick={handleOnClick}>
                         Usuń zgłoszenie
                     </button>
                 </div>

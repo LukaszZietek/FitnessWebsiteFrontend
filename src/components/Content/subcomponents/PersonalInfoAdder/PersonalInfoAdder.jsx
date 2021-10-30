@@ -60,37 +60,36 @@ const PersonalInfoAdder = () => {
         <div className="center-div">
             <h1>Dodaj informacje</h1>
             <form className="personal-info-form" onSubmit={handleOnSubmit}>
-                <div className="personal-info-row">
-                    <label>
-                        Wzrost [cm]:
-                        <br/>
-                        <input className="form-input" type="number" min="100" max="250" value={height}
-                            onChange={handleOnHeightChange} />
-                    </label>
+                <div className="first-row f-column">
+                    <label htmlFor="height" className="m-right-10">Wzrost [cm]</label>
+                </div>
+                <div className="first-row s-column">
+                    <input id="height" className="form-input" type="number" min="100" max="250" value={height}
+                        onChange={handleOnHeightChange} />
                     <p className="validator-message">{simpleValidator.current.message('wzrost', height, 'min:100,num|max:250,num')}</p>
                 </div>
-                <div className="personal-info-row">
-                    <label>
-                        Waga [kg]:
-                        <br/>
-                        <input className="form-input" type="number" min="30" max="200" value={weight}
-                            onChange={handleOnWeightChange} />
-                    </label>
+
+                <div className="second-row f-column">
+                    <label htmlFor="weight" className="m-right-10">Waga [kg]</label>
+                </div>
+                <div className="second-row s-column">
+                    <input id="weight" className="form-input" type="number" min="30" max="200" value={weight}
+                        onChange={handleOnWeightChange} />
                     <p className="validator-message">{simpleValidator.current.message('waga', weight, 'min:30,num|max:200,num')}</p>
                 </div>
-                <div className="personal-info-row">
-                    <label>
-                        Płeć
-                        <br/>
-                        <select className="form-input select-input" name="type" value={gender} onChange={handleOnGenderChange}>
+
+                <div className="third-row f-column">
+                    <label className="m-right-10">Płeć</label>
+                </div>
+                <div className="third-row s-column">
+                    <select className="form-input select-input" name="type" value={gender} onChange={handleOnGenderChange}>
                             <option value={DEFAULT_VALUE}></option>
                             <option value={MAN}>Męzczyzna</option>
                             <option value={WOMAN}>Kobieta</option>
-                        </select>
-                    </label>
+                    </select>
                     <p className="validator-message">{simpleValidator.current.message('płeć', gender, 'in:0,1')}</p>
                 </div>
-                <div>
+                <div className="button-row">
                     <button type="button" className="button cancel-button" onClick={handleOnCancel}>Anuluj</button>
                     <button type="submit" className="button add-button">Dodaj</button>
                 </div>

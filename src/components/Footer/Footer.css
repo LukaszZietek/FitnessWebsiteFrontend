@@ -57,9 +57,9 @@
   border-radius: 5px;
   height: auto;
   width: 100px;
-  background-color: orange;
+  background-color: greenyellow;
   font-size: medium;
-  color: white;
+  color: black;
   transition: background-color 0.5s ease-out;
   padding-bottom: 5px;
   padding-top: 5px;
@@ -86,7 +86,7 @@
 .footer-column-content a:hover {
   text-decoration: none;
   color: white;
-  background-color: orange;
+  background-color: greenyellow;
   color: black;
   border-radius: 5px;
 }

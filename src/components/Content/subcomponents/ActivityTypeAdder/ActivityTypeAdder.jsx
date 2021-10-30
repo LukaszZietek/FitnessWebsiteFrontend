@@ -57,7 +57,7 @@ const ActivityTypeAdder = () => {
     return (
         <div className="center-div">
             <h1>Dodaj nowy typ aktywności</h1>
-            <form onSubmit={handleOnSubmit}>
+            {/* <form onSubmit={handleOnSubmit}>
                 <div className="activity-type-row">
                     <label className="center-div">
                         Nazwa aktywności:
@@ -107,6 +107,58 @@ const ActivityTypeAdder = () => {
                     </p>
                 </div>
                 <div className="activity-type-row">
+                    <button type="submit" className="button add-button activity-type-button">Dodaj</button>
+                </div>
+            </form> */}
+             <form onSubmit={handleOnSubmit} className="activity-type-form">
+                <div className="first-row f-column">
+                    <label htmlFor="name" className="m-right-10">Nazwa aktywności</label>
+                </div>
+                <div className="first-row s-column">
+                    <input id="name" className="activity-type-input" type="text" value={activityName} 
+                        onChange={handleOnActivityNameChange} />
+                    <p className="validator-message">
+                        {simpleValidator.current.message('nazwa aktywności', activityName,
+                            'required|max:30,string')}
+                    </p>
+                </div>
+
+                <div className="second-row f-column">
+                    <label htmlFor="lowMet" className="m-right-10">Wskaźnik MET dla wolnego tempa aktywności</label>
+                </div>
+                <div className="second-row s-column">
+                    <input id="lowMet" className="activity-type-input" type="number" value={slowSpeedMET} 
+                        onChange={handleOnSlowSpeedMETChange} />
+                    <p className="validator-message">
+                        {simpleValidator.current.message('Wskaznik met', slowSpeedMET,
+                            'required|min:1,num|max:200,num')}
+                    </p>
+                </div>
+
+                <div className="third-row f-column">
+                    <label htmlFor="mediumMet" className="m-right-10">Wskaźnik MET dla średniego tempa aktywności</label>
+                </div>
+                <div className="third-row s-column">
+                    <input id="mediumMet" className="activity-type-input" type="number" value={mediumSpeedMET} 
+                        onChange={handleOnMediumSpeedMETChange} />
+                    <p className="validator-message">
+                        {simpleValidator.current.message('Wskaznik met', mediumSpeedMET,
+                            'required|min:1,num|max:200,num')}
+                    </p>
+                </div>
+
+                <div className="fourth-row f-column">
+                    <label htmlFor="fastMet" className="m-right-10">Wskaźnik MET dla szybkiego tempa aktywności</label>
+                </div>
+                <div className="fourth-row s-column">
+                    <input id="fastMet" className="activity-type-input" type="number" value={fastSpeedMET} 
+                        onChange={handleOnFastSpeedMETChange} />
+                    <p className="validator-message">
+                        {simpleValidator.current.message('Wskaznik met', fastSpeedMET,
+                            'required|min:1,num|max:200,num')}
+                    </p>
+                </div>
+                <div className="button-row">
                     <button type="submit" className="button add-button activity-type-button">Dodaj</button>
                 </div>
             </form>

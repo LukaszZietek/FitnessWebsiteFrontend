@@ -75,7 +75,7 @@ const ActivityTypeDeleter = () => {
                     <p className="validator-message">{simpleValidator.current.message('typ aktywności', activityType, 'required')}</p>
                 </div>
                 <div>
-                    <button type="submit" className="button delete-button w-300 m-0">Usuń</button>
+                    <button type="submit" className="button cancel-button w-300 m-0">Usuń</button>
                 </div>
             </form>
         </div>

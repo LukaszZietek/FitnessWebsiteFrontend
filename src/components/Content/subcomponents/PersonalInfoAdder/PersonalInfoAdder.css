@@ -1,26 +1,43 @@
 .personal-info-form {
   margin-top: 50px;
-  width: 100%;
+  height: 100%;
   display: grid;
-  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  grid-column-gap: 15px;
 }
 
-.personal-info-row {
-  width: 100%;
-  display: grid;
-  place-items: center;
+.personal-info-form .f-column {
+  padding-top: 10px;
+  text-align: right;
+}
+
+.button-row {
+  grid-column: 1/3;
+}
+
+.button-row .button {
+  height: 40px;
+}
+
+.button-row .cancel-button {
+  margin: 10px 10px 10px 0px;
+}
+
+.button-row .add-button {
+  margin: 10px 0px 10px 10px;
+}
+
+.m-right-10 {
+  margin-right: 10px;
 }
 
 .form-input {
-  width: 100px;
-  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 5px;
-  padding: 7px 7px 7px 7px;
-}
-
-.select-input {
-  -ms-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
+  padding: 5px 5px 5px 5px;
+  height: 40px;
+  width: 100%;
 }

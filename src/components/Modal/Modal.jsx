@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import "./Modal.css";
 
-const Modal = ({children, handleOnClose, isOpen, shouldBeClosedOnOutsideClick}) => {
+const Modal = ({children, handleOnClose, isOpen, shouldBeClosedOnOutsideClick, className}) => {
     const modalRef = useRef(null);
     const previousActiveElement = useRef(null);
 
@@ -47,7 +47,7 @@ const Modal = ({children, handleOnClose, isOpen, shouldBeClosedOnOutsideClick}) 
     }
 
     return ReactDOM.createPortal((
-        <dialog ref={modalRef} className="modal-style" onClick={handleOutsideClick}>
+        <dialog ref={modalRef} className={`modal-style ${className}`} onClick={handleOutsideClick}>
             {children}
         </dialog>
     ), document.body)

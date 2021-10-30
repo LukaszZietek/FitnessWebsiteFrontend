@@ -1,10 +1,38 @@
+.activity-type-form {
+  margin-top: 50px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5px;
+  grid-column-gap: 15px;
+}
+
+.activity-type-form .f-column {
+  padding-top: 10px;
+  text-align: right;
+}
+
+.button-row {
+  grid-column: 1/3;
+}
+
+.button-row .add-button {
+  margin: 10px 0px 10px 0px;
+  height: 40px;
+}
+
+.m-right-10 {
+  margin-right: 10px;
+}
+
 .activity-type-input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border-radius: 5px;
-  height: auto;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  width: 150px;
-  padding-left: 10px;
+  padding: 5px 5px 5px 5px;
+  height: 40px;
+  width: 100%;
 }
 
 .activity-type-row {

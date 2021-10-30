@@ -23,10 +23,10 @@ const MainPage = () => {
             <div className="right-div">
                 <h1>Dołącz do nas już dziś</h1>
                 <div className="center-div">
-                    <Link to={ABOUT_US_PATH} className="link-as-button button info-button">O nas</Link>
+                    <Link to={ABOUT_US_PATH} className="link-as-button button main-page-button">O nas</Link>
                 </div>
                 <div className="center-div">
-                    <Link to={CONTACT_PATH} className="link-as-button button info-button">Kontakt</Link>
+                    <Link to={CONTACT_PATH} className="link-as-button button main-page-button">Kontakt</Link>
                 </div>
             </div>
         </div>

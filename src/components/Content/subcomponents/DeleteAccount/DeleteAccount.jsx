@@ -40,8 +40,8 @@ const DeleteAccount = () => {
     return (
         <div className="delete-container">
             <h1>Czy aby na pewno chcesz usunąć swoje konto? Zabieg ten jest nieodwracalny</h1>
-            <button className="ok-button" onClick={handleSubmitButton}>Tak</button>
-            <button className="delete-button" onClick={handleCancelButton}>Nie</button>
+            <button className="button add-button" onClick={handleSubmitButton}>Tak</button>
+            <button className="button cancel-button" onClick={handleCancelButton}>Nie</button>
         </div>
     )
 }

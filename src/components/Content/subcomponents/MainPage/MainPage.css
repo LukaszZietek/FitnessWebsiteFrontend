@@ -41,3 +41,8 @@
   font-size: 30px;
   line-height: 80px;
 }
+
+.main-page-button {
+  background-color: greenyellow;
+  color: black;
+}

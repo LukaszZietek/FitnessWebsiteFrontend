@@ -36,11 +36,11 @@
 }
 
 .aside-link:hover {
-  background-color: orange;
+  background-color: greenyellow;
   color: black;
 }
 
 .aside-active {
-  background-color: orange;
+  background-color: greenyellow;
   color: black;
 }

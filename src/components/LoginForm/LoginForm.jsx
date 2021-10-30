@@ -37,6 +37,10 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
 
     const handleOnSubmit = e => {
         e.preventDefault();
+        if (!login || !password) {
+            alert('Dane logowania nie zostały podane');
+            return
+        }
         loginQuery.mutate({login, password}, {onSuccess: (response) => {
             if (response.status === SUCCESS_CODE)
             {
@@ -58,23 +62,19 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
 
 
     return (
-        <Modal handleOnClose={handleOnClose} isOpen={isModalOpen} shouldBeClosedOnOutsideClick={true}>
+        <Modal className="login-modal" handleOnClose={handleOnClose} isOpen={isModalOpen} shouldBeClosedOnOutsideClick={true}>
             <div className="modal-header">
                 Logowanie
             </div>
             <form className="modal-form" method="post" onSubmit={handleOnSubmit}>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Email lub nazwa użytkownika
-                        <br/>
-                        <input type="text" value={login} onChange={handleOnLoginChange} className="modal-input"/>
+                        <input type="text" value={login} placeholder="Email lub nazwa użytkownika" onChange={handleOnLoginChange} className="modal-input"/>
                     </label>
                 </div>
                 <div className="modal-row">
                     <label className="modal-label">
-                        Hasło
-                        <br/>
-                        <input type="password" value={password} onChange={handleOnPasswordChange} className="modal-input"/>
+                        <input type="password" value={password} placeholder="Hasło" onChange={handleOnPasswordChange} className="modal-input"/>
                     </label>
                 </div>
                 <div className="modal-row">
