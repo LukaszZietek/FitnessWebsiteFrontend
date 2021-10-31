@@ -1,9 +1,28 @@
 .about-us-container {
   margin-top: 30px;
-  margin-left: 30px;
-  width: 75%;
+}
+
+.about-us-container a {
+  width: 230px;
+  height: 100px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  line-height: 80px;
 }
 
 .about-us-container h1 {
-  border-bottom: 1px solid #696969;
+  font-family: "Teko", sans-serif;
+  font-size: 40px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid greenyellow;
+}
+
+.about-us-container p {
+  width: 70%;
+  text-align: center;
+}
+
+.about-us-button {
+  background-color: greenyellow;
+  color: black;
 }

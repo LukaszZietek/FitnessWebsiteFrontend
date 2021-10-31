@@ -90,27 +90,27 @@ const DailyReports = () => {
     return (
         <div className="report-container">
             <h1>Raport dzienny</h1>
-            <table className="report-table">
+            <table className="report-table app-table">
                 <tbody>
                     <tr>
                         <th className="left-th">Spożyta wartość energetyczna [kcal]: </th>
-                        <th className="right-th">{calories}</th>
+                        <td className="right-th">{calories}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spożyte białko [g]: </th>
-                        <th className="right-th">{proteins}</th>
+                        <td className="right-th">{proteins}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spożyte węglowodany [g]: </th>
-                        <th className="right-th">{carbohydrates}</th>
+                        <td className="right-th">{carbohydrates}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spożyte tłuszcze [g]: </th>
-                        <th className="right-th">{fats}</th>
+                        <td className="right-th">{fats}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spalone kalorie [kcal]: </th>
-                        <th className="right-th">{burnedCalories}</th>
+                        <td className="right-th">{burnedCalories}</td>
                     </tr>
                 </tbody>
             </table>

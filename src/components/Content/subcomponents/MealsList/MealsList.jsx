@@ -131,26 +131,27 @@ const MealsList = () => {
 
     const mealsRow = userMeals.map(item => (
         <tr key={item.id}>
-            <th>{item.name}</th>
-            <th>{`${item.quantity} ${getQuantityUnitName(item.quantityUnit)}`}</th>
-            <th>{item.calories}</th>
-            <th>{item.proteins}</th>
-            <th>{item.fats}</th>
-            <th>{item.carbohydrates}</th>
-            <th>
-                <button className="button delete-button" onClick={() => deleteItem(item.id)} >
+            <td>{item.name}</td>
+            <td>{`${item.quantity} ${getQuantityUnitName(item.quantityUnit)}`}</td>
+            <td>{item.calories}</td>
+            <td>{item.proteins}</td>
+            <td>{item.fats}</td>
+            <td>{item.carbohydrates}</td>
+            <td>
+                <button className="button cancel-button" onClick={() => deleteItem(item.id)} >
                     Usuń
                 </button>
-            </th>
+            </td>
         </tr>
     ))
 
     return (
         <div className="meals-container">
-            <input type="date" value={mealsDate} onChange={handleDateChange} 
-                min={getPreviousMonthDate()} max={getCurrentDate()} />
             <h1>Lista posiłków z dnia {mealsDate}</h1>
-            <table className="meals-table">
+            Wybierz date:
+            <input className="data-input" type="date" value={mealsDate} onChange={handleDateChange} 
+                min={getPreviousMonthDate()} max={getCurrentDate()} />
+            <table className="meals-table app-table color-green">
                 <tbody>
                     <tr className="header-row">
                         <th>Nazwa</th>
@@ -165,23 +166,23 @@ const MealsList = () => {
                 </tbody>
             </table>
             <h2>Podsumowanie</h2>
-            <table className="meals-table">
+            <table className="meals-table app-table align-left">
                 <tbody>
                     <tr>
-                        <th className="font-weight-b">Spożyte kalorie / Zapotrzebowanie kaloryczne [kcal]/[kcal]</th>
-                        <th>{`${eatenCalories}/${caloricDemand}`}</th>
+                        <th className="font-weight-b">Spożyte kalorie / Zapotrzebowanie kaloryczne [kcal] / [kcal]</th>
+                        <td>{`${eatenCalories} / ${caloricDemand}`}</td>
+                    </tr>
+                    <tr >
+                        <th className="font-weight-b">Spożyte białka / Zapotrzebowanie na białka [g] / [g]</th>
+                        <td>{`${eatenProteins} / ${proteinsDemand}`}</td>
                     </tr>
                     <tr>
-                        <th className="font-weight-b">Spożyte białka / Zapotrzebowanie na białka [g]/[g]</th>
-                        <th>{`${eatenProteins}/${proteinsDemand}`}</th>
+                        <th className="font-weight-b">Spożyte tłuszcze / Zapotrzebowanie na tłuszcze [g] / [g]</th>
+                        <td>{`${eatenFats} / ${fatsDemand}`}</td>
                     </tr>
                     <tr>
-                        <th className="font-weight-b">Spożyte tłuszcze / Zapotrzebowanie na tłuszcze [g]/[g]</th>
-                        <th>{`${eatenFats}/${fatsDemand}`}</th>
-                    </tr>
-                    <tr>
-                        <th className="font-weight-b">Spożyte węglowodany / Zapotrzebowanie na węglowodany [g]/[g]</th>
-                        <th>{`${eatenCarbohydrates}/${carbohydratesDemand}`}</th>
+                        <th className="font-weight-b">Spożyte węglowodany / Zapotrzebowanie na węglowodany [g] / [g]</th>
+                        <td>{`${eatenCarbohydrates} / ${carbohydratesDemand}`}</td>
                     </tr>
                 </tbody>
             </table>

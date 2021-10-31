@@ -7,22 +7,15 @@
   column-width: auto;
   text-align: center;
   margin: 0 auto;
-  border: 1px solid;
   width: auto;
   border-collapse: collapse;
+  border-radius: 1em;
 }
 
-.meals-table th,
-.meals-table tr {
+.meals-table tr,
+.meals-table td {
   font-weight: normal;
   padding: 15px;
-  border-bottom: 1px solid;
-  border-collapse: collapse;
-}
-
-.meals-table th {
-  border-right: 1px solid;
-  border-collapse: collapse;
 }
 
 .header-row th {

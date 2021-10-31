@@ -135,3 +135,60 @@
 .seventh-row {
   grid-row: 7;
 }
+
+.app-table th {
+  border-right: 0px;
+  font-weight: normal;
+  padding: 15px;
+}
+
+.color-green th {
+  background-color: green;
+  color: white;
+}
+
+.app-table {
+  -webkit-box-shadow: 7px 7px 10px -5px #888888;
+  -moz-box-shadow: 7px 7px 10px -5px #888888;
+  box-shadow: 7px 7px 10px -5px #888888;
+}
+
+.app-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.app-table tr:first-child th:first-child,
+.app-table tr:first-child td:first-child {
+  border-top-left-radius: 5px;
+}
+
+.app-table tr:first-child th:last-child,
+.app-table tr:first-child td:last-child {
+  border-top-right-radius: 5px;
+}
+
+.app-table tr:last-child th:first-child,
+.app-table tr:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+.app-table tr:last-child th:last-child,
+.app-table tr:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+
+.align-left th {
+  text-align: left;
+}
+
+.data-input {
+  margin-left: 25px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  height: 40px;
+  width: 200px;
+  margin-bottom: 25px;
+}

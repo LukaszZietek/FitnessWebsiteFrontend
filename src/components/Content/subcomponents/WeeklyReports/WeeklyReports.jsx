@@ -155,47 +155,47 @@ const WeeklyReports = () => {
     return (
         <div className="report-container">
             <h1>Raport tygodniowy</h1>
-            <table className="report-table">
+            <table className="report-table app-table">
                 <tbody>
                     <tr>
                         <th className="left-th">Spożyta wartość energetyczna [kcal]: </th>
-                        <th className="right-th">{calories}</th>
+                        <td className="right-th">{calories}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spożyte białko [g]: </th>
-                        <th className="right-th">{proteins}</th>
+                        <td className="right-th">{proteins}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spożyte węglowodany [g]: </th>
-                        <th className="right-th">{carbohydrates}</th>
+                        <td className="right-th">{carbohydrates}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spożyte tłuszcze [g]: </th>
-                        <th className="right-th">{fats}</th>
+                        <td className="right-th">{fats}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Średnia spożywana wartość energetyczna w ciągu dnia [kcal]: </th>
-                        <th className="right-th">{averageCalories}</th>
+                        <td className="right-th">{averageCalories}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Średnia spożywana wartość białka w ciągu dnia [g]: </th>
-                        <th className="right-th">{averageProteins}</th>
+                        <td className="right-th">{averageProteins}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Średnia spożywana wartość węglowodanów w ciągu dnia [g]: </th>
-                        <th className="right-th">{averageCarbohydrates}</th>
+                        <td className="right-th">{averageCarbohydrates}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Średnia spożywana wartość tłuszczy w ciągu dnia [g]: </th>
-                        <th className="right-th">{averageFats}</th>
+                        <td className="right-th">{averageFats}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Spalone kalorie [kcal]: </th>
-                        <th className="right-th">{burnedCalories}</th>
+                        <td className="right-th">{burnedCalories}</td>
                     </tr>
                     <tr>
                         <th className="left-th">Średnia spalona wartość kalorii w ciągu dnia [kcal]: </th>
-                        <th className="right-th">{averageBurnedCalories}</th>
+                        <td className="right-th">{averageBurnedCalories}</td>
                     </tr>
                 </tbody>
             </table>

@@ -4,29 +4,29 @@
 }
 
 .report-table {
-  text-align: left;
+  column-width: auto;
+  text-align: center;
   margin: 0 auto;
-  border: 1px solid;
-  width: 50%;
+  width: auto;
   border-collapse: collapse;
+  border-radius: 1em;
 }
 
 .report-table th,
 .report-table tr {
   padding: 15px;
-  border-bottom: 1px solid;
 }
 
 .report-table th {
-  border-right: 1px solid;
-  border-collapse: collapse;
+  font-weight: bold;
 }
 
 .left-th {
-  width: 90%;
+  text-align: left;
+  font-weight: bold;
 }
 
 .right-th {
-  width: 10%;
+  padding: 15px;
   text-align: center;
 }

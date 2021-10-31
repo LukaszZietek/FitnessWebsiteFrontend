@@ -109,24 +109,25 @@ const ActivitiesList = () => {
 
     const activitiesRow = userActivities.map(item => (
         <tr key={item.id}>
-            <th>{item.activity.name}</th>
-            <th>{item.duration}</th>
-            <th>{getActivitySpeedName(item.speed)}</th>
-            <th>{item.burnedCalories}</th>
-            <th>
-                <button className="button delete-button" onClick={() => deleteItem(item.id)}>
+            <td>{item.activity.name}</td>
+            <td>{item.duration}</td>
+            <td>{getActivitySpeedName(item.speed)}</td>
+            <td>{item.burnedCalories}</td>
+            <td>
+                <button className="button cancel-button" onClick={() => deleteItem(item.id)}>
                     Usuń
                 </button>
-            </th>
+            </td>
         </tr>
     ));
 
     return (
         <div className="activities-container">
-            <input type="date" value={activityDate} onChange={handleDateChange} 
+            <h1>Aktywności z dnia {activityDate}</h1>
+            Wybierz date: 
+            <input className="data-input" type="date" value={activityDate} onChange={handleDateChange} 
                 min={getPreviousMonthDate()} max={getCurrentDate()} />
-            <h1>Aktywność z dnia {activityDate}</h1>
-            <table className="activities-table">
+            <table className="activities-table app-table color-green">
                 <tbody>
                     <tr className="header-row">
                         <th>Typ aktywności</th>
@@ -138,20 +139,20 @@ const ActivitiesList = () => {
                     {activitiesRow}
                 </tbody>
             </table>
-            <h2>Ogółem</h2>
-            <table className="activities-table">
+            <h2>Podsumowanie</h2>
+            <table className="activities-table app-table align-left">
                 <tbody>
                     <tr>
                         <th className="font-weight-b">Spalone kalorie [kcal]</th>
-                        <th>{totallyBurnedCalories}</th>
+                        <td>{totallyBurnedCalories}</td>
                     </tr>
                     <tr>
                         <th className="font-weight-b">Średni czas aktywności [min]</th>
-                        <th>{averageActivityTime}</th>
+                        <td>{averageActivityTime}</td>
                     </tr>
                     <tr>
                         <th className="font-weight-b">Najczęstsze tempo aktywności</th>
-                        <th>{commonActivitySpeed}</th>
+                        <td>{commonActivitySpeed}</td>
                     </tr>
                 </tbody>
             </table>
