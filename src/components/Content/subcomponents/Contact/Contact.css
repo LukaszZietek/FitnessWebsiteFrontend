@@ -13,3 +13,11 @@
   padding-bottom: 20px;
   border-bottom: 3px solid greenyellow;
 }
+
+.inner-contact-div {
+  width: 25%;
+  -webkit-box-shadow: 7px 7px 10px 8px #888888;
+  -moz-box-shadow: 7px 7px 10px 8px #888888;
+  box-shadow: 7px 7px 10px 8px #888888;
+  padding: 15px;
+}
