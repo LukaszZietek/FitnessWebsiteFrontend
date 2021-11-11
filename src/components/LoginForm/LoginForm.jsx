@@ -47,7 +47,7 @@ const LoginForm = ({handleOnClose, isModalOpen}) => {
                 alert('Zalogowano');
                 handleOnClose();
             } else {
-                alert(`Serwer wysłał odpowiedź ze statusem ${response.status}, spróbuj ponownie za chwile lub skontaktuj się z administratorem`);
+                alert("Podany login lub hasło jest niepoprawne");
             }
         }, onError: (error) => {
             alert(`Wystąpił błąd: ${error.message}, spróbuj wykonać operacje ponownie lub skontaktuj się z administratorem`);
