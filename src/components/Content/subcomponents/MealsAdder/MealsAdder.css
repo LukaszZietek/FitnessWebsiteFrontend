@@ -39,11 +39,6 @@
   box-sizing: content-box;
 }
 
-.half-input-width {
-  width: 116px;
-  border-width: 2px;
-}
-
 .select-input-width {
   width: 50px;
   border-width: 2px;
@@ -55,4 +50,14 @@
 
 .meals-adder-container .m-right-10 {
   margin-right: 10px;
+}
+
+.quantity-container {
+  margin-left: 10px;
+  font-size: 1.17em;
+  font-weight: bold;
+}
+
+.padding-top-0 {
+  padding-top: 0px;
 }

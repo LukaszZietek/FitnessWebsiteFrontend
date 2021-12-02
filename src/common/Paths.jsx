@@ -15,3 +15,5 @@ export const MESSAGES_FROM_CLIENT = MY_ACCOUNT_PATH + "/messages";
 export const MESSAGE = MY_ACCOUNT_PATH + "/messages/:id";
 export const ADD_NEW_ACTIVITY_TYPE_PATH = MY_ACCOUNT_PATH + "/activity-type";
 export const DELETE_ACTIVITY_TYPE_PATH = MY_ACCOUNT_PATH + "/delete-activity-type";
+export const ADD_NEW_MEAL_TYPE_PATH = MEALS_PATH + "/add-type";
+export const DELETE_MEAL_TYPE_PATH = MEALS_PATH + "/delete-meal-type";

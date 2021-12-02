@@ -54,27 +54,27 @@ const MealsList = () => {
     React.useEffect( () => {
         const computeTotallyEatenCalories = () => {
             var eatenCaloriesByUser = userMeals.reduce((prev, cur) => {
-                return prev + cur.calories;
+                return prev + parseInt(cur.meal.caloriesIn100Unit * cur.quantity / 100);
             }, 0);
             setEatenCalories(eatenCaloriesByUser);
         };
    
        const computeTotallyEatenCarbohydrates = () => {
            var eatenCarbohydratesByUser = userMeals.reduce((prev, cur) => {
-               return prev + cur.carbohydrates;
+               return prev + parseInt(cur.meal.carbohydratesIn100Unit * cur.quantity / 100);
            }, 0);
            setEatenCarbohydrates(eatenCarbohydratesByUser);
        };
        const computeTotallyEatenFats = () => {
            var eatenFatsByUser = userMeals.reduce((prev, cur) => {
-               return prev + cur.fats;
+               return prev + parseInt(cur.meal.fatsIn100Unit * cur.quantity / 100);
            }, 0);
            setEatenFats(eatenFatsByUser);
        };
    
        const computeTotallyEatenProteins = () => {
            var eatenProteinsByUser = userMeals.reduce((prev, cur) => {
-               return prev + cur.proteins;
+               return prev + parseInt(cur.meal.proteinsIn100Unit * cur.quantity / 100);
            }, 0);
            setEatenProteins(eatenProteinsByUser);
        };
@@ -131,12 +131,12 @@ const MealsList = () => {
 
     const mealsRow = userMeals.map(item => (
         <tr key={item.id}>
-            <td>{item.name}</td>
-            <td>{`${item.quantity} ${getQuantityUnitName(item.quantityUnit)}`}</td>
-            <td>{item.calories}</td>
-            <td>{item.proteins}</td>
-            <td>{item.fats}</td>
-            <td>{item.carbohydrates}</td>
+            <td>{item.meal.name}</td>
+            <td>{`${item.quantity} ${getQuantityUnitName(item.meal.quantityUnit)}`}</td>
+            <td>{parseInt(item.meal.caloriesIn100Unit * item.quantity / 100)}</td>
+            <td>{parseInt(item.meal.proteinsIn100Unit * item.quantity / 100)}</td>
+            <td>{parseInt(item.meal.fatsIn100Unit * item.quantity / 100)}</td>
+            <td>{parseInt(item.meal.carbohydratesIn100Unit * item.quantity / 100)}</td>
             <td>
                 <button className="button cancel-button" onClick={() => deleteItem(item.id)} >
                     Usuń

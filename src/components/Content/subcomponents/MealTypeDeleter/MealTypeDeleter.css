@@ -1,0 +1,26 @@
+.meal-type-deleter-select {
+  border-radius: 5px;
+  height: auto;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 300px;
+  padding-left: 10px;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.m-0 {
+  margin: 10px 0px 0px 0px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.meal-type-center-div {
+  display: grid;
+  place-items: center;
+  margin-top: 50px;
+}

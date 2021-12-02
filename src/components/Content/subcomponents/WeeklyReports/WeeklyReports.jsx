@@ -34,7 +34,7 @@ const WeeklyReports = () => {
                 }
                 const computeEatenCalories = () => {
                     return (data.reduce((prev, cur) => {
-                        return prev + cur.calories;
+                        return prev + parseInt(cur.meal.caloriesIn100Unit * cur.quantity / 100);
                     }, 0));
                 }
 
@@ -45,7 +45,7 @@ const WeeklyReports = () => {
 
                 const computeEatenCarbohydrates = () => {
                     return (data.reduce((prev, cur) => {
-                        return prev + cur.carbohydrates;
+                        return prev + parseInt(cur.meal.carbohydratesIn100Unit * cur.quantity / 100);
                     }, 0));
                 }
            
@@ -56,7 +56,7 @@ const WeeklyReports = () => {
 
                 const computeEatenFats = () => {
                    return (data.reduce((prev, cur) => {
-                       return prev + cur.fats;
+                       return prev + parseInt(cur.meal.fatsIn100Unit * cur.quantity / 100);
                    }, 0));
                 };
 
@@ -67,7 +67,7 @@ const WeeklyReports = () => {
 
                 const computeEatenProteins = () => {
                    return (data.reduce((prev, cur) => {
-                        return prev + cur.proteins;
+                        return prev + parseInt(cur.meal.proteinsIn100Unit * cur.quantity / 100);
                     }, 0));
                 }
 

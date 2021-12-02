@@ -28,27 +28,27 @@ const DailyReports = () => {
                 }
                 const computeTotallyEatenCalories = () => {
                     var eatenCaloriesByUser = data.reduce((prev, cur) => {
-                        return prev + cur.calories;
+                        return prev + parseInt(cur.meal.caloriesIn100Unit * cur.quantity / 100);
                     }, 0);
                     setCalories(eatenCaloriesByUser);
                 };
            
                const computeTotallyEatenCarbohydrates = () => {
                    var eatenCarbohydratesByUser = data.reduce((prev, cur) => {
-                       return prev + cur.carbohydrates;
+                       return prev + parseInt(cur.meal.carbohydratesIn100Unit * cur.quantity / 100);
                    }, 0);
                    setCarbohydrates(eatenCarbohydratesByUser);
                };
                const computeTotallyEatenFats = () => {
                    var eatenFatsByUser = data.reduce((prev, cur) => {
-                       return prev + cur.fats;
+                       return prev + parseInt(cur.meal.fatsIn100Unit * cur.quantity / 100);
                    }, 0);
                    setFats(eatenFatsByUser);
                };
            
                const computeTotallyEatenProteins = () => {
                    var eatenProteinsByUser = data.reduce((prev, cur) => {
-                       return prev + cur.proteins;
+                       return prev + parseInt(cur.meal.proteinsIn100Unit * cur.quantity / 100);
                    }, 0);
                    setProteins(eatenProteinsByUser);
                };

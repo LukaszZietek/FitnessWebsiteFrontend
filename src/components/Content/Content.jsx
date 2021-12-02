@@ -12,7 +12,7 @@ import WeeklyReports from './subcomponents/WeeklyReports/WeeklyReports';
 import MonthlyReports from './subcomponents/MonthlyReports/MonthlyReports';
 import {CHANGE_PASSWORD_PATH, DELETE_ACCOUNT_PATH, WEEKLY_REPORTS_PATH, MONTHLY_REPORTS_PATH, REPORT_PATH, 
 CONTACT_PATH, ABOUT_US_PATH, ADD_ACTIVITIES_PATH, ACTIVITIES_PATH, MEALS_PATH, ADD_MEALS_PATH, MY_ACCOUNT_PATH, ADD_PERSONAL_INFO_PATH,
-MESSAGES_FROM_CLIENT, MESSAGE, ADD_NEW_ACTIVITY_TYPE_PATH, DELETE_ACTIVITY_TYPE_PATH} from '../../common/Paths';
+MESSAGES_FROM_CLIENT, MESSAGE, ADD_NEW_ACTIVITY_TYPE_PATH, DELETE_ACTIVITY_TYPE_PATH, ADD_NEW_MEAL_TYPE_PATH, DELETE_MEAL_TYPE_PATH} from '../../common/Paths';
 import ActivitiesAdder from './subcomponents/ActivitiesAdder/ActivitiesAdder';
 import ActivitiesList from './subcomponents/ActivitiesList/ActivitiesList';
 import MealsList from './subcomponents/MealsList/MealsList';
@@ -27,6 +27,8 @@ import ActivityTypeAdder from './subcomponents/ActivityTypeAdder/ActivityTypeAdd
 import ActivityTypeDeleter from './subcomponents/ActivityTypeDeleter/ActivityTypeDeleter';
 import { ApplicationContext } from '../../ApplicationContext/ApplicationProvider';
 import SignInIsRequiredViewer from './subcomponents/SignInIsRequiredViewer/SignInIsRequiredViewer';
+import MealTypeAdder from './subcomponents/MealTypeAdder/MealTypeAdder';
+import MealTypeDeleter from './subcomponents/MealTypeDeleter/MealTypeDeleter';
 
 const Content = () => {
     const {userId} = useContext(ApplicationContext);
@@ -50,6 +52,8 @@ const Content = () => {
                     <Route path={ADD_ACTIVITIES_PATH} component={ActivitiesAdder} />
                     <Route path={ACTIVITIES_PATH} component={ActivitiesList} />
                     <Route path={ADD_MEALS_PATH} component={MealsAdder} />
+                    <Route path={ADD_NEW_MEAL_TYPE_PATH} component={MealTypeAdder} />
+                    <Route path={DELETE_MEAL_TYPE_PATH} component={MealTypeDeleter} />
                     <Route path={MEALS_PATH} component={MealsList} />
                     <Route path="/" exact component={MainPage} />
                     <Route>{NotFound}</Route>
@@ -76,6 +80,8 @@ const Content = () => {
                     <Route path={ADD_ACTIVITIES_PATH} component={SignInIsRequiredViewer} />
                     <Route path={ACTIVITIES_PATH} component={SignInIsRequiredViewer} />
                     <Route path={ADD_MEALS_PATH} component={SignInIsRequiredViewer} />
+                    <Route path={ADD_NEW_MEAL_TYPE_PATH} component={SignInIsRequiredViewer} />
+                    <Route path={DELETE_MEAL_TYPE_PATH} component={SignInIsRequiredViewer} />
                     <Route path={MEALS_PATH} component={SignInIsRequiredViewer} />
                     <Route path="/" exact component={MainPage} />
                     <Route>{NotFound}</Route>

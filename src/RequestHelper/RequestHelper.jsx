@@ -53,6 +53,12 @@ export const deleteUserActivity = async ({userActivityId, token}) => {
     return response;
 }
 
+export const getMealTypes = async (token) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.get('/api/meal');
+    return response;
+}
+
 export const getUserMeals = async (userId, token, mealsDate) => {
     request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await request.get(`/api/user-meal/GetMealsFromGivenDate/${userId}?date=${mealsDate}`);
@@ -66,17 +72,38 @@ export const getUserMealsForTimePeriod = async (userId, token, startDate, endDat
     return response;
 };
 
+export const getUserMealTypes = async (userId, token) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.get(`/api/meal/GetAllUserMealTypes/${userId}`);
+    return response;
+}
+
 export const deleteUserMeal = async ({mealId, token}) => {
     request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     const response = await request.delete(`/api/user-meal/${mealId}`);
     return response;
 };
 
-export const addUserMeal = async ({name, quantity, quantityUnit, calories, proteins, carbohydrates, fats, token}) => {
+export const deleteUserMealType = async ({mealTypeId, token}) => {
     request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    const response = await request.post('api/user-meal', {name, quantity, quantityUnit, calories, proteins, carbohydrates, fats});
+    const response = await request.delete(`/api/meal/${mealTypeId}`);
     return response;
-}
+};
+
+export const addUserMeal = async ({name, quantity, mealId, token}) => {
+    request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const response = await request.post('api/user-meal', {name, quantity, mealId});
+    return response;
+};
+
+export const addUserMealType = async ({name, quantityUnit, caloriesIn100Unit, 
+    proteinsIn100Unit, carbohydratesIn100Unit, fatsIn100Unit, token}) =>
+    {
+        request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        const response = await request.post('api/meal', {name, quantityUnit, caloriesIn100Unit, proteinsIn100Unit,
+             carbohydratesIn100Unit, fatsIn100Unit});
+        return response;
+    }
 
 export const registerAccount = async (obj) => {
     const response = await request.post('/api/user/register', obj);
